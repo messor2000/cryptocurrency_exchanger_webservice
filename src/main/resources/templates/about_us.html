@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org" lang="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate"/>
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="expires" content="0"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <link rel="shortcut icon" href="/images/logo.ico" type="image/x-icon">
+    <title th:text="#{title.about.us}">Document</title>
+</head>
+
+<body>
+<div class="content">
+    <div class="header_mobile">
+        <div class="header_mobile_wrapper js-header-mobile-wrapper">
+            <div class="container container_help">
+                <div class="header_top_row">
+                    <div class="logo_wrapper">
+                        <a href="/">
+                            <img src="/images/logo.svg" alt="" class="logo_img logo_img_tablet">
+                            <img src="/images/logo_mobile.svg" alt="" class="logo_img logo_img_mobile">
+                            <p class="logo_text">MEDIAP2P</p>
+                        </a>
+                    </div>
+                    <div class="lang_cab_wrapper">
+                        <div>
+                            <div  class="lang_cab_wrapper_unauth" sec:authorize="!isAuthenticated()">
+                                <a href="/registration" class="btn_auth_mobile">Авторизация</a>
+                                <ul class="mobile_lang_wrapper mobile_lang_wrapper_unauthed">
+                                    <div class="nav_menu__item nav_menu__item_flag_wrapper" th:if="${#locale.toString() == 'ru_RU'}">
+                                        <a th:href="@{${#httpServletRequest.requestURI}(lang='en_US')}" class="nav_menu__item_lang">
+                                            <span>EN</span>
+                                            <img src="/images/lang_arrow.png" alt="" class="lang_arrow">
+                                        </a>
+                                    </div>
+                                    <div class="nav_menu__item nav_menu__item_flag_wrapper" th:if="${#locale.toString() == 'en_US'}">
+                                        <a th:href="@{${#httpServletRequest.requestURI}(lang='ru_RU')}" class="nav_menu__item_lang">
+                                            <span>RU</span>
+                                            <img src="/images/lang_arrow.png" alt="" class="lang_arrow">
+                                        </a>
+                                    </div>
+                                </ul>
+                            </div>
+                            <div sec:authorize="hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')" class="btns_auth_wrapper lang_cab_wrapper_authed">
+                                <div>
+                                    <a href="/account/history" class="btn_cabinet_wrapper">
+                                        <img src="/images/user-mobile.svg" alt="" class="user_avatar_mobile">
+                                        <span>Личный кабинет</span>
+                                    </a>
+                                </div>
+                                <ul class="mobile_lang_wrapper mobile_lang_wrapper_authed">
+                                    <div class="nav_menu__item nav_menu__item_flag_wrapper" th:if="${#locale.toString() == 'ru_RU'}">
+                                        <a th:href="@{${#httpServletRequest.requestURI}(lang='en_US')}" class="nav_menu__item_lang">
+                                            <span>EN</span>
+                                            <img src="/images/lang_arrow.png" alt="" class="lang_arrow">
+                                        </a>
+                                    </div>
+                                    <div class="nav_menu__item nav_menu__item_flag_wrapper" th:if="${#locale.toString() == 'en_US'}">
+                                        <a th:href="@{${#httpServletRequest.requestURI}(lang='ru_RU')}" class="nav_menu__item_lang">
+                                            <span>RU</span>
+                                            <img src="/images/lang_arrow.png" alt="" class="lang_arrow">
+                                        </a>
+                                    </div>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="burger_icon_wrapper">
+                        <div  class="js-burger-icon">
+                            <img src="/images/burger_icon.svg" class="burger_icon_tablet" alt="">
+                            <img src="/images/burger_icon_mobile.svg" class="burger_icon_mobile" alt="">
+                        </div>
+
+                    </div>
+                </div>
+                <div class="container_burger">
+                    <div class="burger_menu js-burger-menu">
+
+                        <ul class="menu_list_top">
+                            <li class="burger_item burger_item_first burger_item_mobile_tablet">
+                                <a href="/" class="burger_item_link">Начать обмен</a>
+                            </li>
+                            <li class="burger_item burger_item_first burger_item_mobile">
+                                <a href="/" class="burger_item_link">Главная</a>
+                            </li>
+                            <li class="burger_item">
+                                <a href="/about-us" class="burger_item_link">О нас</a>
+                            </li>
+                            <li class="burger_item">
+                                <a href="/reserves" class="burger_item_link">Наши резервы</a>
+                            </li>
+
+
+                            <li class="close_burger_wrapper js-close">
+                                <img src="/images/cross_burger.png" alt="">
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!--    <div class="burger_menu_wrapper js-burger-menu">-->
+
+        <div class="overlay js-overlay"></div>
+
+
+    </div>
+    <header>
+        <div class="container header_desktop">
+            <div class="header_block">
+                <div class="logo_wrapper">
+                    <div class="logo_img_wrapper">
+                        <a href="/">
+                            <img src="/images/logo_desktop.svg" alt="" class="logo_img">
+                        </a>
+                    </div>
+                    <a href="/">
+                        <p class="logo_text">MEDIAP2P</p>
+                    </a>
+                </div>
+
+                <div class="nav_menu_right">
+                    <div class="nav_menu_unauth" sec:authorize="!isAuthenticated()">
+                        <ul class="nav_menu">
+                            <div class="nav_menu_left">
+                                <li class="nav_menu__item"><a href="/" class="nav_menu__item_link">НАЧАТЬ ОБМЕН</a></li>
+                                <li class="nav_menu__item"><a href="/reserves" class="nav_menu__item_link">РЕЗЕРВЫ</a></li>
+                                <li class="nav_menu__item"><a href="/about-us" class="nav_menu__item_link">О НАС</a></li>
+                            </div>
+                        </ul>
+
+
+                        <div class="nav_menu__item nav_menu__item_auth">
+                            <div>
+                                <div class="nav_menu__item nav_menu__item_flag_wrapper" th:if="${#locale.toString() == 'ru_RU'}">
+                                    <a th:href="@{${#httpServletRequest.requestURI}(lang='en_US')}" class="nav_menu__item_lang">
+                                        <span>EN</span>
+                                        <img src="/images/lang_arrow.png" alt="" class="lang_arrow">
+                                    </a>
+                                </div>
+                                <div class="nav_menu__item nav_menu__item_flag_wrapper" th:if="${#locale.toString() == 'en_US'}">
+                                    <a th:href="@{${#httpServletRequest.requestURI}(lang='ru_RU')}" class="nav_menu__item_lang">
+                                        <span>RU</span>
+                                        <img src="/images/lang_arrow.png" alt="" class="lang_arrow">
+                                    </a>
+                                </div>
+                            </div>
+                            <a th:href="@{/login}" class="btn_auth btn_login_header">Войти</a>
+                            <a th:href="@{/registration}" class="btn_aut btn_register_header">Регистрация</a>
+                        </div>
+                    </div>
+                    <div sec:authorize="hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')" class="btns_auth_wrapper">
+                        <ul class="nav_menu nav_menu_authed">
+                            <div class="nav_menu_left">
+                                <li class="nav_menu__item nav_menu__item_autheduser"><a href="/" class="nav_menu__item_link">НАЧАТЬ ОБМЕН</a></li>
+                                <li class="nav_menu__item nav_menu__item_autheduser"><a href="/reserves" class="nav_menu__item_link">РЕЗЕРВЫ</a></li>
+                                <li class="nav_menu__item nav_menu__item_autheduser"><a href="/about-us" class="nav_menu__item_link">О НАС</a></li>
+                            </div>
+                        </ul>
+                        <div class="authed_user_wrapper">
+                            <div>
+                                <div class="nav_menu__item nav_menu__item_flag_wrapper" th:if="${#locale.toString() == 'ru_RU'}">
+                                    <a th:href="@{${#httpServletRequest.requestURI}(lang='en_US')}" class="nav_menu__item_lang">
+                                        <span>EN</span>
+                                        <img src="/images/lang_arrow.png" alt="" class="lang_arrow">
+                                    </a>
+                                </div>
+                                <div class="nav_menu__item nav_menu__item_flag_wrapper" th:if="${#locale.toString() == 'en_US'}">
+                                    <a th:href="@{${#httpServletRequest.requestURI}(lang='ru_RU')}" class="nav_menu__item_lang">
+                                        <span>RU</span>
+                                        <img src="/images/lang_arrow.png" alt="" class="lang_arrow">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="btn_cabinet_text">
+                                <div class="header_percent_wrapper">
+                                    <div class="header_wallet">
+                                        <span><img src="/images/wallet.png" alt="" class="wallet_img"></span>
+                                        <span><span th:text="${walletAmount}"></span><span> $</span></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="/account/history" class="btn_cabinet_wrapper">
+                                <span class="btn_cabinet_user">
+                                    <img src="/images/user_header.svg" alt="" class="cabinet_user_img">
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="page_about">
+        <div class="container">
+            <div class="about_header_wrapper about_us_header_wrapper">
+                <div class="about_header_left">
+                    <p class="about_title">Только здесь вы найдете самую актуальную информацию по текущей работе сервиса.</p>
+                    <p class="about_subtitle">Ты попал на информационную страницу экосистемы «Питупи».  Данный обменник был создан совместно с проектами Сосед и Харчевников. </p>
+                </div>
+
+                <div class="about_header_right">
+                    <img src="/images/about_header.png" alt="" class="about_header_img">
+                </div>
+            </div>
+
+            <div class="about_cards about_cards_desktop">
+                <div class="about_card about_card_course">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="673" height="555" viewBox="0 0 673 555" fill="none">
+                        <path d="M60 555H613C646.137 555 673 528.137 673 495V131.773C673 89.8681 628.445 62.99 591.376 82.533C558.633 99.7956 518.447 80.7547 510.896 44.518C505.501 18.6315 482.669 0 456.226 0H60C26.8629 0 0 26.8629 0 60V495C0 528.137 26.8629 555 60 555Z" fill="#B5FF57"/>
+                    </svg>
+                    <img src="/images/course.png" alt="" class="course_img">
+                    <div class="about_card_content">
+                        <h2 class="card_title">ЛУЧШИЙ КУРС</h2>
+                        <p class="card_description">Мы предлагаем вам лучший курс обмена, превосходящий BestChange и Binance. <b>При обмене нашей платформе Вы получите больше, чем на других альтернативных площадках!</b></p>
+                        <div><a href="/" class="card_btn">Начать обмен</a></div>
+                    </div>
+
+                </div>
+                <div class="about_card about_card_service">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="656" height="547" viewBox="0 0 656 547" fill="none">
+                        <path d="M595 1H61C27.8629 1 1 27.8629 1 61V486C1 519.137 27.8629 546 60.9999 546H417.091C436.714 546 451.009 527.405 445.964 508.441C424.548 427.947 505.527 358.294 581.914 391.505L607.542 402.647C629.95 412.39 655 395.966 655 371.531V61C655 27.8629 628.137 1 595 1Z" fill="#B67CFF" stroke="black"/>
+                    </svg>
+                    <img src="/images/service.png" alt="" class="service_img">
+                    <div class="about_card_content about_card_content_title">
+                        <h2 class="card_title">СЕРВИС</h2>
+                        <p class="card_description card_description_tablet"><span>Мы предоставляем </span><b>интуитивно-понятный интерфейс,</b> <span>который позволяет легко найти необходимые функции и выполнить операции обмена.</span></p>
+                    </div>
+
+                  </div>
+            </div>
+
+            <div class="about_cards about_cards_tablet">
+                <div class="about_card third_card">
+                    <div class="bc_black">
+                        <img src="/images/100k.png" alt="" class="k_img">
+                    </div>
+                    <p class="title title_tablet">Вероятность скама невозможна,</p>
+                    <p class="subtitle subtitle_tablet">
+                        <span>в качестве гаранта за каждую сделку выступает сообщество «Питупи», </span>
+                        <span>которому доверяют 100 000 человек</span>
+                    </p>
+                </div>
+                <div class="about_card about_card_service">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="342" height="357" viewBox="0 0 342 357" fill="none">
+                        <path d="M177.064 356.398L302.741 354.069C324.54 353.665 342 335.879 342 314.076L342 40C342 17.9086 324.091 -3.20832e-05 302 -3.40145e-05L40 -5.69193e-05C17.9086 -5.88506e-05 -8.93839e-07 17.9085 -2.82513e-06 39.9999L-2.36282e-05 277.959C-2.4815e-05 291.534 10.4325 302.83 23.9649 303.908L27.1849 304.164C37.6722 304.999 48.2251 304.299 58.5102 302.086C71.0696 299.384 84.0837 298.65 96.5591 301.717C100.848 302.771 105.123 304.02 108.5 305.423C109.972 306.034 111.602 306.847 113.275 307.761C123.412 313.297 131.221 322.132 137.5 331.827L144.984 341.263C152.734 351.032 164.596 356.629 177.064 356.398Z" fill="#B67CFF"/>
+                    </svg>
+                    <img src="/images/service_tablet.png" alt="" class="service_img">
+                    <div class="about_card_content about_card_content_title">
+                        <h2 class="card_title">СЕРВИС</h2>
+                        <p class="card_description card_description_tablet"><span>Мы предоставляем</span><b>интуитивно-понятный интерфейс,</b> <span>который позволяет легко найти необходимые функции и выполнить операции обмена.</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about_cards about_cards_mobile">
+                <div class="about_card_mobile">
+                    <div class="about_card about_card_course about_card_mobile_left">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="340" height="261" viewBox="0 0 340 261" fill="none">
+                            <path d="M0 30C0 13.4315 13.4315 0 30 0H310C326.569 0 340 13.4315 340 30V152V213.62C340 221.245 333.301 227.136 325.738 226.16L317.953 225.155C312.011 224.388 305.993 224.415 300.057 225.233L292.568 226.266C284.369 227.397 276.681 230.904 270.452 236.355C266.194 240.081 262.725 244.621 260.25 249.709L257.126 256.13C255.825 258.803 253.113 260.5 250.141 260.5H170H30C13.4315 260.5 0 247.069 0 230.5V30Z" fill="#B5FF57"/>
+                        </svg>
+                        <img src="/images/course.png" alt="" class="course_img">
+                        <div class="about_card_content">
+                            <h2 class="card_title">ЛУЧШИЙ КУРС</h2>
+                            <p class="card_description">Мы предлагаем вам лучший курс обмена, превосходящий BestChange и Binance. <b>При обмене нашей платформе Вы получите больше, чем на других альтернативных площадках!</b></p>
+                            <div><a href="/" class="card_btn">начaть обмен</a></div>
+                        </div>
+
+                    </div>
+                    <div class="about_card_mobile_right">
+                        <img src="/images/about_mobile_01.png" alt="">
+                    </div>
+                </div>
+
+                <div class="about_card about_card_service">
+                    <div class="about_card_mobile">
+                        <div class="about_card_mobile_right">
+                            <img src="/images/about_mobile_02.png" alt="">
+                        </div>
+                        <div class="about_card_mobile_left">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="332" height="252" viewBox="0 0 332 252" fill="none">
+                                <path d="M0 30C0 13.4315 13.4315 0 30 0H150.295C160.701 0 171.044 1.6242 180.949 4.81394L195.5 9.5L205.483 12.8278C221.058 18.0194 238.118 16.2112 252.259 7.86989C260.993 2.71755 270.949 0 281.09 0H290.5H302C318.569 0 332 13.4315 332 30V222C332 238.569 318.569 252 302 252H30C13.4314 252 0 238.569 0 222V30Z" fill="#B67CFF"/>
+                            </svg>
+                            <img src="/images/service_tablet.png" alt="" class="service_img">
+                            <div class="about_card_content about_card_content_mobile">
+                                <h2 class="card_title">СЕРВИС</h2>
+                                <p class="card_description"><span>Мы предоставляем</span><b>интуитивно-понятный интерфейс,</b> <span>который позволяет легко найти необходимые функции и выполнить операции обмена.</span></p>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <div class="about_card third_card">
+                    <div class="bc_black">
+                        <img src="/images/100k_mobile.png" alt="" class="k_img">
+                    </div>
+                    <p class="title">Вероятность скама невозможна,</p>
+                    <p class="subtitle">в качестве гаранта за каждую сделку выступает сообщество «Питупи», которому доверяют 100 000 человек</p>
+                </div>
+
+            </div>
+        </div>
+        <marquee behavior="alternate" direction="left" class="marquee_mobile">
+            MEDIAP2P MEDIAP2P MEDIAP2P MEDIAP2P MEDIAP2PMEDIAP2P MEDIAP2P MEDIAP2P MEDIAP2P MEDIAP2PMEDIAP2P MEDIAP2P MEDIAP2P MEDIAP2P MEDIAP2P
+        </marquee>
+
+        <div class="third_card_wrapper about_cards_desktop">
+            <marquee behavior="alternate" direction="left">
+                MEDIAP2P MEDIAP2P MEDIAP2P MEDIAP2P MEDIAP2PMEDIAP2P MEDIAP2P MEDIAP2P MEDIAP2P MEDIAP2PMEDIAP2P MEDIAP2P MEDIAP2P MEDIAP2P MEDIAP2P
+            </marquee>
+            <div class="third_card">
+                <div class="bc_black">
+                    <img src="/images/100k.png" alt="" class="k_img">
+                </div>
+                <p class="title">Вероятность скама невозможна,</p>
+                <p class="subtitle">в качестве гаранта за каждую сделку выступает сообщество «Питупи», которому доверяют 100 000 человек</p>
+            </div>
+        </div>
+        <div class="about_cards_tablet">
+            <marquee behavior="alternate" direction="left">
+                MEDIAP2P MEDIAP2P MEDIAP2P MEDIAP2P MEDIAP2PMEDIAP2P MEDIAP2P MEDIAP2P MEDIAP2P MEDIAP2PMEDIAP2P MEDIAP2P MEDIAP2P MEDIAP2P MEDIAP2P
+            </marquee>
+                <div class="about_card about_card_course">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="330" height="402" viewBox="0 0 330 402" fill="none">
+                        <path d="M193.499 0H40C17.9086 0 0 17.9086 0 40V362C0 384.091 17.9086 402 40 402H290C312.091 402 330 384.091 330 362V51.6437C330 25.4924 305.318 6.37494 279.997 12.9147L266.465 16.4096C258.67 18.4229 250.449 18.0371 242.877 15.3027L207.085 2.37784C202.728 0.804572 198.131 0 193.499 0Z" fill="#B5FF57"/>
+                    </svg>
+                    <img src="/images/course.png" alt="" class="course_img">
+                    <div class="about_card_content">
+                        <h2 class="card_title">ЛУЧШИЙ КУРС</h2>
+                        <p class="card_description">Мы предлагаем вам лучший курс обмена, превосходящий BestChange и Binance. <b>При обмене нашей платформе Вы получите больше, чем на других альтернативных площадках!</b></p>
+                        <div><a href="/" class="card_btn">Начaть обмен</a></div>
+                    </div>
+
+                </div>
+        </div>
+
+        <div class="container">
+
+            <div class="creators creators_desktop">
+                <h1 class="creators_title">СОЗДАТЕЛИ ПЛАТФОРМЫ</h1>
+                <img src="/images/creators.png" alt="" class="creators_img">
+            </div>
+            <div class="creators creators_tablet">
+                <h1 class="creators_title">СОЗДАТЕЛИ ПЛАТФОРМЫ</h1>
+
+                <div class="creators_tablet1">
+                    <img src="/images/creators_tablet1.png" alt="">
+                    <img src="/images/creators_tablet4.png" alt="" class="creators_tablet4_img">
+                </div>
+                <div class="creators_tablet23">
+                    <img src="/images/creators_tablet2.png" alt="" class="creators_tablet23_img1">
+                    <img src="/images/creators_tablet3.png" alt="" class="creators_tablet23_img2">
+                </div>
+            </div>
+
+            <div class="creators creators_mobile">
+                <div class="creators_title_wrapper">
+                    <h1 class="creators_title">СОЗДАТЕЛИ ПЛАТФОРМЫ</h1>
+                    <div class="creators_title_img_wrapper">
+                        <img src="/images/creators_title.png" alt="" class="creators_title_img">
+                    </div>
+
+                </div>
+
+                <div class="creators_tablet23">
+                    <img src="/images/creators_mobile1.png" alt="">
+                    <img src="/images/creators_mobile2.png" alt="">
+                </div>
+            </div>
+            <div class="page_about_block_rights">
+                <h3 class="page_about_block_rights_title"><span>Все права защищены</span> </h3>
+                <p class="page_about_block_rights_text" >Сайт и другие компоненты услуг защищены законами об интеллектуальной собственности с 2023 года. Все права защищены. Доступ к услугам и сайту предоставляется платформой MEDIAP2P, услуги которой распространяются на Великобританию, Азербайджан, Армению, Беларусь, Грузию, Казахстан, Российскую Федерацию, Турцию, Казахстан, Европейский Союз.</p>
+            </div>
+
+            <div class="to_main">
+
+                <a href="/">
+                    <p>НА ГЛАВНУЮ</p>
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>
+<footer>
+
+    <div class="container">
+        <div class="footer_wrapper">
+            <div class="footer_btn">
+                <a href="/">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="62" viewBox="0 0 64 62" fill="none">
+                        <path d="M57.6376 7.90001L58.5111 7.11876L57.3427 7.02881L14.75 3.74978C14.391 3.72214 14.0461 3.55179 13.7952 3.27128C13.5443 2.99075 13.4133 2.62906 13.4257 2.26921C13.4381 1.91035 13.5916 1.58331 13.8464 1.3554C14.1012 1.12749 14.4432 1.01136 14.8013 1.03892L61.8577 4.66161L61.858 4.66163C62.0355 4.6752 62.2117 4.72384 62.376 4.80583C62.5403 4.88782 62.6889 5.00126 62.8129 5.13983C62.9368 5.2784 63.033 5.43871 63.0963 5.61113C63.1595 5.78352 63.1882 5.96397 63.182 6.14189L63.182 6.14217L61.5535 53.3098L62.0526 53.327L61.5535 53.3098C61.5473 53.4877 61.5064 53.6595 61.4341 53.8158C61.3618 53.9721 61.2594 54.1105 61.1328 54.2236C61.0063 54.3368 60.8574 54.4232 60.6941 54.4776C60.5307 54.5321 60.3554 54.5537 60.178 54.5401C60.0004 54.5264 59.8243 54.4777 59.66 54.3957C59.4957 54.3136 59.3471 54.2002 59.2232 54.0616C59.0992 53.923 59.003 53.7627 58.9397 53.5903C58.8764 53.4179 58.8476 53.2375 58.8537 53.0595L60.3277 10.3663L60.3682 9.19508L59.4947 9.97634L3.25676 60.2768C3.00215 60.5045 2.66036 60.6206 2.30261 60.593C1.94388 60.5654 1.59924 60.3952 1.34853 60.1149C1.09781 59.8346 0.966943 59.4731 0.979356 59.1136C0.991736 58.755 1.14504 58.4282 1.39965 58.2005L57.6376 7.90001Z" fill="#11181F" stroke="#B5FF57"/>
+                    </svg>
+                    <span class="footer_btn_text">Начать обмен</span>
+                </a>
+            </div>
+            <div class="footer_top_row">
+                <div class="footer_cols_wrapper">
+                    <ul class="footer_col footer_col_first">
+                        <li class="footer_col_item"><a href="/">Начать обмен</a></li>
+                        <li class="footer_col_item"><a href="/reserves">Наши резервы</a>
+                        <li class="footer_col_item"><a href="/about-us">О нас</a></li>
+                        <li class="footer_col_item_mobile"><a href="/privacy-policy" class="footer_bottom_rules">Privacy Policy</a></li>
+
+
+                    </ul>
+                    <ul class="footer_col footer_col_last">
+                        <div>
+                            <li class="footer_col_item"><a href="/rules">Правила</a></li>
+                            <li class="footer_col_item"><a href="/aml">AML</a></li>
+                            <li class="footer_col_item footer_col_item_contacts"><a href="/contacts">Контакты</a></li>
+                            <li class="footer_col_item_mobile"><a href="/rules" class="footer_bottom_rules">Terms of use</a></li>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer_bottom_row_container">
+                <div class="footer_bottom_row">
+                    <div class="footer_about">
+                        <p class="footer_title footer_title_desktop">Crypto exchanger</p>
+                        <p class="copyright copyright_tablet">Copyright © 2023 MEDIAP2P</p>
+                        <img src="/images/logo.png" alt="" class="logo_footer">
+                        <div class="footer_bottom_row_right_part">
+                            <p class="copyright copyright_desktop">Copyright © 2023 MEDIAP2P</p>
+                            <a href="/privacy-policy" class="footer_bottom_rules footer_bottom_rules_mobile">Privacy Policy</a>
+                            <a href="/rules" class="footer_bottom_rules footer_bottom_rules_mobile">Terms of use</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="footer_logo_big_text footer_logo_big_text_desktop">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1394" height="201" viewBox="0 0 1394 201" fill="none">
+                    <path d="M0 2.71098H51.7499L106.407 135.936H108.733L163.39 2.71098H215.14V201H174.438V71.9379H172.79L121.428 200.032H93.7118L42.3496 71.4538H40.7021V201H0V2.71098Z" fill="#131313"/>
+                    <path d="M249.712 201V2.71098H383.448V37.276H291.674V84.5246H376.568V119.09H291.674V166.435H383.836V201H249.712Z" fill="#131313"/>
+                    <path d="M487.166 201H416.809V2.71098H487.747C507.711 2.71098 524.896 6.68064 539.303 14.6199C553.711 22.4947 564.791 33.8227 572.544 48.604C580.361 63.3854 584.27 81.0713 584.27 101.662C584.27 122.317 580.361 140.067 572.544 154.913C564.791 169.759 553.646 181.152 539.11 189.091C524.638 197.03 507.323 201 487.166 201ZM458.771 165.079H485.422C497.826 165.079 508.26 162.885 516.723 158.496C525.251 154.042 531.648 147.168 535.912 137.873C540.24 128.513 542.404 116.443 542.404 101.662C542.404 87.0096 540.24 75.0361 535.912 65.7413C531.648 56.4465 525.284 49.6045 516.82 45.2153C508.357 40.8261 497.923 38.6315 485.518 38.6315H458.771V165.079Z" fill="#131313"/>
+                    <path d="M657.315 2.71098V201H615.353V2.71098H657.315Z" fill="#131313"/>
+                    <path d="M726.049 201H681.083L749.598 2.71098H803.673L872.092 201H827.126L777.411 48.0231H775.86L726.049 201ZM723.238 123.059H829.452V155.785H723.238V123.059Z" fill="#131313"/>
+                    <path d="M895.98 201V2.71098H974.283C989.337 2.71098 1002.16 5.58334 1012.76 11.328C1023.35 17.0082 1031.43 24.9152 1036.98 35.0491C1042.6 45.1185 1045.42 56.737 1045.42 69.9046C1045.42 83.0723 1042.57 94.6908 1036.89 104.76C1031.2 114.829 1022.96 122.672 1012.18 128.288C1001.45 133.903 988.464 136.711 973.217 136.711H923.309V103.114H966.434C974.509 103.114 981.164 101.726 986.397 98.9509C991.695 96.1108 995.636 92.2057 998.22 87.2355C1000.87 82.2009 1002.19 76.4239 1002.19 69.9046C1002.19 63.3208 1000.87 57.5761 998.22 52.6705C995.636 47.7004 991.695 43.8598 986.397 41.1488C981.099 38.3733 974.38 36.9856 966.24 36.9856H937.942V201H895.98Z" fill="#131313"/>
+                    <path d="M1071.51 201V170.792L1142.16 105.438C1148.16 99.6286 1153.2 94.4003 1157.27 89.7529C1161.41 85.1055 1164.54 80.5549 1166.67 76.1012C1168.81 71.5829 1169.87 66.7095 1169.87 61.4812C1169.87 55.672 1168.55 50.6696 1165.9 46.474C1163.25 42.2139 1159.63 38.9542 1155.04 36.6951C1150.46 34.3714 1145.26 33.2095 1139.44 33.2095C1133.37 33.2095 1128.07 34.4359 1123.55 36.8887C1119.03 39.3415 1115.54 42.8593 1113.08 47.4422C1110.63 52.025 1109.4 57.4793 1109.4 63.8049H1069.57C1069.57 50.8309 1072.51 39.5674 1078.39 30.0145C1084.27 20.4615 1092.51 13.0708 1103.1 7.84248C1113.7 2.61416 1125.91 0 1139.73 0C1153.95 0 1166.32 2.51734 1176.85 7.55203C1187.44 12.5222 1195.68 19.4287 1201.56 28.2717C1207.44 37.1146 1210.38 47.2486 1210.38 58.6734C1210.38 66.1609 1208.89 73.5515 1205.92 80.8454C1203.01 88.1392 1197.81 96.2399 1190.32 105.147C1182.83 113.99 1172.26 124.608 1158.63 137.001L1129.65 165.37V166.725H1213V201H1071.51Z" fill="#131313"/>
+                    <path d="M1244.56 201V2.71098H1322.87C1337.92 2.71098 1350.75 5.58334 1361.34 11.328C1371.94 17.0082 1380.01 24.9152 1385.57 35.0491C1391.19 45.1185 1394 56.737 1394 69.9046C1394 83.0723 1391.16 94.6908 1385.47 104.76C1379.79 114.829 1371.55 122.672 1360.76 128.288C1350.04 133.903 1337.05 136.711 1321.8 136.711H1271.89V103.114H1315.02C1323.09 103.114 1329.75 101.726 1334.98 98.9509C1340.28 96.1108 1344.22 92.2057 1346.8 87.2355C1349.45 82.2009 1350.78 76.4239 1350.78 69.9046C1350.78 63.3208 1349.45 57.5761 1346.8 52.6705C1344.22 47.7004 1340.28 43.8598 1334.98 41.1488C1329.68 38.3733 1322.96 36.9856 1314.82 36.9856H1286.53V201H1244.56Z" fill="#131313"/>
+                </svg>
+            </div>
+
+            <div class="footer_logo_big_text footer_logo_big_text_tablet">
+                <svg xmlns="http://www.w3.org/2000/svg" width="734" height="106" viewBox="0 0 734 106" fill="none">
+                    <path d="M0 1.42967H27.2485L56.0278 71.6879H57.2525L86.0318 1.42967H113.28V106H91.8489V37.9374H90.9814L63.937 105.489H49.3433L22.2989 37.6821H21.4314V106H0V1.42967Z" fill="#121212"/>
+                    <path d="M131.484 106V1.42967H201.902V19.658H153.579V44.5751H198.279V62.8035H153.579V87.7717H202.106V106H131.484Z" fill="#121212"/>
+                    <path d="M256.513 106H219.468V1.42967H256.82C267.331 1.42967 276.38 3.52312 283.966 7.71002C291.552 11.8629 297.386 17.8369 301.468 25.632C305.585 33.4271 307.643 42.754 307.643 53.6127C307.643 64.5055 305.585 73.8664 301.468 81.6956C297.386 89.5247 291.518 95.5328 283.864 99.7197C276.244 103.907 267.127 106 256.513 106ZM241.563 87.0568H255.595C262.126 87.0568 267.62 85.8995 272.077 83.5848C276.567 81.236 279.935 77.6108 282.18 72.7091C284.459 67.7733 285.599 61.4078 285.599 53.6127C285.599 45.8857 284.459 39.5713 282.18 34.6696C279.935 29.7678 276.584 26.1596 272.128 23.8449C267.671 21.5302 262.177 20.3728 255.646 20.3728H241.563V87.0568Z" fill="#121212"/>
+                    <path d="M346.104 1.42967V106H324.01V1.42967H346.104Z" fill="#121212"/>
+                    <path d="M382.295 106H358.619L394.695 1.42967H423.168L459.193 106H435.517L409.34 25.3256H408.523L382.295 106ZM380.816 64.8969H436.741V82.1551H380.816V64.8969Z" fill="#121212"/>
+                    <path d="M471.772 106V1.42967H513.001C520.928 1.42967 527.68 2.94445 533.259 5.97399C538.838 8.96949 543.09 13.1394 546.016 18.4836C548.976 23.7938 550.455 29.921 550.455 36.8651C550.455 43.8092 548.959 49.9364 545.965 55.2466C542.971 60.5568 538.634 64.6927 532.953 67.6541C527.306 70.6156 520.468 72.0963 512.44 72.0963H486.161V54.3786H508.868C513.12 54.3786 516.624 53.6468 519.38 52.183C522.169 50.6853 524.244 48.6259 525.605 46.0048C527 43.3497 527.697 40.3031 527.697 36.8651C527.697 33.3931 527 30.3635 525.605 27.7765C524.244 25.1554 522.169 23.1301 519.38 21.7004C516.59 20.2367 513.052 19.5048 508.766 19.5048H493.866V106H471.772Z" fill="#121212"/>
+                    <path d="M564.194 106V90.0694L601.393 55.604C604.557 52.5405 607.21 49.7832 609.353 47.3324C611.531 44.8815 613.18 42.4817 614.303 40.1329C615.426 37.7502 615.987 35.1802 615.987 32.4229C615.987 29.3593 615.29 26.7213 613.895 24.5087C612.5 22.262 610.595 20.543 608.18 19.3516C605.765 18.1262 603.026 17.5135 599.964 17.5135C596.767 17.5135 593.977 18.1602 591.596 19.4538C589.215 20.7473 587.378 22.6024 586.085 25.0193C584.792 27.4361 584.146 30.3125 584.146 33.6484H563.174C563.174 26.8064 564.722 20.8664 567.817 15.8285C570.913 10.7906 575.25 6.89307 580.829 4.13584C586.408 1.37861 592.838 0 600.118 0C607.602 0 614.116 1.32755 619.661 3.98266C625.24 6.60373 629.577 10.246 632.673 14.9094C635.768 19.5729 637.316 24.9171 637.316 30.9422C637.316 34.8908 636.534 38.7884 634.969 42.6349C633.438 46.4814 630.7 50.7534 626.754 55.4509C622.808 60.1143 617.246 65.7139 610.068 72.2495L594.811 87.21V87.9249H638.694V106H564.194Z" fill="#121212"/>
+                    <path d="M655.316 106V1.42967H696.546C704.472 1.42967 711.225 2.94445 716.804 5.97399C722.383 8.96949 726.635 13.1394 729.561 18.4836C732.52 23.7938 734 29.921 734 36.8651C734 43.8092 732.503 49.9364 729.51 55.2466C726.516 60.5568 722.179 64.6927 716.498 67.6541C710.851 70.6156 704.013 72.0963 695.985 72.0963H669.706V54.3786H692.413C696.665 54.3786 700.169 53.6468 702.924 52.183C705.714 50.6853 707.789 48.6259 709.15 46.0048C710.545 43.3497 711.242 40.3031 711.242 36.8651C711.242 33.3931 710.545 30.3635 709.15 27.7765C707.789 25.1554 705.714 23.1301 702.924 21.7004C700.135 20.2367 696.597 19.5048 692.311 19.5048H677.411V106H655.316Z" fill="#121212"/>
+                </svg>
+            </div>
+            <div class="footer_logo_big_text footer_logo_big_text_mobile">
+                <svg xmlns="http://www.w3.org/2000/svg" width="409" height="56" viewBox="0 0 409 56" fill="none">
+                    <path d="M0 0.755299H15.1834L31.2199 37.8728H31.9023L47.9387 0.755299H63.1221V56H51.1801V20.0424H50.6967L35.627 55.7303H27.4951L12.4254 19.9075H11.942V56H0V0.755299Z" fill="#121212"/>
+                    <path d="M73.2657 56V0.755299H112.504V10.3854H85.5774V23.5491H110.485V33.1792H85.5774V46.3699H112.618V56H73.2657Z" fill="#121212"/>
+                    <path d="M142.935 56H122.292V0.755299H143.105C148.962 0.755299 154.005 1.86127 158.232 4.07322C162.459 6.26718 165.71 9.42325 167.984 13.5414C170.278 17.6596 171.425 22.587 171.425 28.3237C171.425 34.0784 170.278 39.0238 167.984 43.1599C165.71 47.2961 162.44 50.4701 158.175 52.6821C153.929 54.894 148.849 56 142.935 56ZM134.604 45.9923H142.423C146.062 45.9923 149.124 45.3809 151.607 44.158C154.109 42.9171 155.986 41.0019 157.237 38.4123C158.507 35.8048 159.142 32.4419 159.142 28.3237C159.142 24.2415 158.507 20.9056 157.237 18.316C155.986 15.7264 154.118 13.8202 151.635 12.5973C149.152 11.3744 146.091 10.763 142.451 10.763H134.604V45.9923Z" fill="#121212"/>
+                    <path d="M192.857 0.755299V56H180.545V0.755299H192.857Z" fill="#121212"/>
+                    <path d="M213.023 56H199.83L219.932 0.755299H235.798L255.872 56H242.679L228.093 13.3796H227.638L213.023 56ZM212.198 34.2852H243.361V43.4027H212.198V34.2852Z" fill="#121212"/>
+                    <path d="M262.881 56V0.755299H285.855C290.272 0.755299 294.034 1.55556 297.143 3.15607C300.252 4.7386 302.621 6.94155 304.251 9.76493C305.901 12.5703 306.725 15.8073 306.725 19.4759C306.725 23.1445 305.891 26.3815 304.223 29.1869C302.555 31.9923 300.138 34.1773 296.972 35.7418C293.826 37.3064 290.016 38.0886 285.542 38.0886H270.899V28.7283H283.552C285.921 28.7283 287.874 28.3417 289.409 27.5684C290.964 26.7771 292.12 25.6891 292.878 24.3044C293.655 22.9017 294.044 21.2922 294.044 19.4759C294.044 17.6416 293.655 16.0411 292.878 14.6744C292.12 13.2897 290.964 12.2197 289.409 11.4644C287.855 10.6911 285.883 10.3044 283.495 10.3044H275.192V56H262.881Z" fill="#121212"/>
+                    <path d="M314.381 56V47.5838L335.109 29.3757C336.872 27.7572 338.35 26.3006 339.544 25.0058C340.758 23.711 341.677 22.4432 342.302 21.2023C342.928 19.9435 343.241 18.5857 343.241 17.1291C343.241 15.5106 342.852 14.1169 342.075 12.948C341.298 11.7611 340.236 10.8529 338.89 10.2235C337.545 9.57611 336.019 9.25241 334.313 9.25241C332.531 9.25241 330.976 9.59409 329.65 10.2775C328.323 10.9608 327.299 11.9409 326.579 13.2177C325.858 14.4945 325.498 16.0141 325.498 17.7765H313.812C313.812 14.1618 314.675 11.0238 316.4 8.36224C318.125 5.70071 320.541 3.64162 323.65 2.18497C326.759 0.728323 330.341 0 334.398 0C338.568 0 342.198 0.701349 345.288 2.10405C348.397 3.48876 350.813 5.41297 352.538 7.87669C354.263 10.3404 355.126 13.1638 355.126 16.3468C355.126 18.4329 354.69 20.492 353.818 22.5241C352.965 24.5562 351.439 26.8131 349.24 29.2948C347.041 31.7585 343.942 34.7168 339.942 38.1696L331.441 46.0732V46.4509H355.894V56H314.381Z" fill="#121212"/>
+                    <path d="M365.156 56V0.755299H388.13C392.547 0.755299 396.309 1.55556 399.418 3.15607C402.527 4.7386 404.896 6.94155 406.526 9.76493C408.175 12.5703 409 15.8073 409 19.4759C409 23.1445 408.166 26.3815 406.498 29.1869C404.83 31.9923 402.413 34.1773 399.247 35.7418C396.101 37.3064 392.291 38.0886 387.817 38.0886H373.174V28.7283H385.827C388.196 28.7283 390.149 28.3417 391.684 27.5684C393.238 26.7771 394.395 25.6891 395.153 24.3044C395.93 22.9017 396.319 21.2922 396.319 19.4759C396.319 17.6416 395.93 16.0411 395.153 14.6744C394.395 13.2897 393.238 12.2197 391.684 11.4644C390.13 10.6911 388.158 10.3044 385.77 10.3044H377.467V56H365.156Z" fill="#121212"/>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+</footer>
+<script src="//code.tidio.co/y1qxv75ounfxvprxbxargnrelyfkfkbf.js" async></script>
+<script src="/js/burger.js"></script>
+<script src="/js/header.js"></script>
+</body>
+</html>

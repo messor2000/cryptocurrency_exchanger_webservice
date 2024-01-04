@@ -1,0 +1,293 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate"/>
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="expires" content="0"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="/css/stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <link rel="shortcut icon" href="/images/logo.ico" type="image/x-icon">
+    <title th:text="#{title.activationMain}">Document</title>
+</head>
+<body>
+<div class="update_password_page_bc">
+    <div class="header_mobile">
+        <div class="header_mobile_wrapper js-header-mobile-wrapper">
+            <div class="container container_help">
+                <div class="header_top_row">
+                    <div class="logo_wrapper">
+                        <a href="/">
+                            <img src="/images/logo.svg" alt="" class="logo_img logo_img_tablet">
+                            <img src="/images/logo_mobile.svg" alt="" class="logo_img logo_img_mobile">
+                            <p class="logo_text">MEDIAP2P</p>
+                        </a>
+                    </div>
+                    <div class="lang_cab_wrapper">
+                        <div>
+                            <div  class="lang_cab_wrapper_unauth" sec:authorize="!isAuthenticated()">
+                                <a href="/registration" class="btn_auth_mobile">Авторизация</a>
+                                <ul class="mobile_lang_wrapper mobile_lang_wrapper_unauthed">
+                                    <div class="nav_menu__item nav_menu__item_flag_wrapper" th:if="${#locale.toString() == 'ru_RU'}">
+                                        <a th:href="@{${#httpServletRequest.requestURI}(lang='en_US')}" class="nav_menu__item_lang">
+                                            <span>EN</span>
+                                            <img src="/images/lang_arrow.png" alt="" class="lang_arrow">
+                                        </a>
+                                    </div>
+                                    <div class="nav_menu__item nav_menu__item_flag_wrapper" th:if="${#locale.toString() == 'en_US'}">
+                                        <a th:href="@{${#httpServletRequest.requestURI}(lang='ru_RU')}" class="nav_menu__item_lang">
+                                            <span>RU</span>
+                                            <img src="/images/lang_arrow.png" alt="" class="lang_arrow">
+                                        </a>
+                                    </div>
+                                </ul>
+                            </div>
+                            <div sec:authorize="hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')" class="btns_auth_wrapper lang_cab_wrapper_authed">
+                                <div>
+                                    <a href="/account/history" class="btn_cabinet_wrapper">
+                                        <img src="/images/user-mobile.svg" alt="" class="user_avatar_mobile">
+                                        <span>Личный кабинет</span>
+                                    </a>
+                                </div>
+                                <ul class="mobile_lang_wrapper mobile_lang_wrapper_authed">
+                                    <div class="nav_menu__item nav_menu__item_flag_wrapper" th:if="${#locale.toString() == 'ru_RU'}">
+                                        <a th:href="@{${#httpServletRequest.requestURI}(lang='en_US')}" class="nav_menu__item_lang">
+                                            <span>EN</span>
+                                            <img src="/images/lang_arrow.png" alt="" class="lang_arrow">
+                                        </a>
+                                    </div>
+                                    <div class="nav_menu__item nav_menu__item_flag_wrapper" th:if="${#locale.toString() == 'en_US'}">
+                                        <a th:href="@{${#httpServletRequest.requestURI}(lang='ru_RU')}" class="nav_menu__item_lang">
+                                            <span>RU</span>
+                                            <img src="/images/lang_arrow.png" alt="" class="lang_arrow">
+                                        </a>
+                                    </div>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="burger_icon_wrapper">
+                        <div  class="js-burger-icon">
+                            <img src="/images/burger_icon.svg" class="burger_icon_tablet" alt="">
+                            <img src="/images/burger_icon_mobile.svg" class="burger_icon_mobile" alt="">
+                        </div>
+
+                    </div>
+                </div>
+                <div class="container_burger">
+                    <div class="burger_menu js-burger-menu">
+
+                        <ul class="menu_list_top">
+                            <li class="burger_item burger_item_first burger_item_mobile_tablet">
+                                <a href="/" class="burger_item_link">Начать обмен</a>
+                            </li>
+                            <li class="burger_item burger_item_first burger_item_mobile">
+                                <a href="/" class="burger_item_link">Главная</a>
+                            </li>
+                            <li class="burger_item">
+                                <a href="/about-us" class="burger_item_link">О нас</a>
+                            </li>
+                            <li class="burger_item">
+                                <a href="/reserves" class="burger_item_link">Наши резервы</a>
+                            </li>
+
+
+                            <li class="close_burger_wrapper js-close">
+                                <img src="/images/cross_burger.png" alt="">
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!--    <div class="burger_menu_wrapper js-burger-menu">-->
+
+        <div class="overlay js-overlay"></div>
+
+
+    </div>
+    <header>
+        <div class="container header_desktop">
+            <div class="header_block">
+                <div class="logo_wrapper">
+                    <div class="logo_img_wrapper">
+                        <a href="/">
+                            <img src="/images/logo_desktop.svg" alt="" class="logo_img">
+                        </a>
+                    </div>
+                    <a href="/">
+                        <p class="logo_text">MEDIAP2P</p>
+                    </a>
+                </div>
+
+                <div class="nav_menu_right">
+                    <div class="nav_menu_unauth" sec:authorize="!isAuthenticated()">
+                        <ul class="nav_menu">
+                            <div class="nav_menu_left">
+                                <li class="nav_menu__item"><a href="/" class="nav_menu__item_link">НАЧАТЬ ОБМЕН</a></li>
+                                <li class="nav_menu__item"><a href="/reserves" class="nav_menu__item_link">РЕЗЕРВЫ</a></li>
+                                <li class="nav_menu__item"><a href="/about-us" class="nav_menu__item_link">О НАС</a></li>
+                            </div>
+                        </ul>
+
+
+                        <div class="nav_menu__item nav_menu__item_auth">
+                            <div>
+                                <div class="nav_menu__item nav_menu__item_flag_wrapper" th:if="${#locale.toString() == 'ru_RU'}">
+                                    <a th:href="@{${#httpServletRequest.requestURI}(lang='en_US')}" class="nav_menu__item_lang">
+                                        <span>EN</span>
+                                        <img src="/images/lang_arrow.png" alt="" class="lang_arrow">
+                                    </a>
+                                </div>
+                                <div class="nav_menu__item nav_menu__item_flag_wrapper" th:if="${#locale.toString() == 'en_US'}">
+                                    <a th:href="@{${#httpServletRequest.requestURI}(lang='ru_RU')}" class="nav_menu__item_lang">
+                                        <span>RU</span>
+                                        <img src="/images/lang_arrow.png" alt="" class="lang_arrow">
+                                    </a>
+                                </div>
+                            </div>
+                            <a th:href="@{/login}" class="btn_auth btn_login_header">Войти</a>
+                            <a th:href="@{/registration}" class="btn_aut btn_register_header">Регистрация</a>
+                        </div>
+                    </div>
+                    <div sec:authorize="hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')" class="btns_auth_wrapper">
+                        <ul class="nav_menu nav_menu_authed">
+                            <div class="nav_menu_left">
+                                <li class="nav_menu__item nav_menu__item_autheduser"><a href="/" class="nav_menu__item_link">НАЧАТЬ ОБМЕН</a></li>
+                                <li class="nav_menu__item nav_menu__item_autheduser"><a href="/reserves" class="nav_menu__item_link">РЕЗЕРВЫ</a></li>
+                                <li class="nav_menu__item nav_menu__item_autheduser"><a href="/about-us" class="nav_menu__item_link">О НАС</a></li>
+                            </div>
+                        </ul>
+                        <div class="authed_user_wrapper">
+                            <div>
+                                <div class="nav_menu__item nav_menu__item_flag_wrapper" th:if="${#locale.toString() == 'ru_RU'}">
+                                    <a th:href="@{${#httpServletRequest.requestURI}(lang='en_US')}" class="nav_menu__item_lang">
+                                        <span>EN</span>
+                                        <img src="/images/lang_arrow.png" alt="" class="lang_arrow">
+                                    </a>
+                                </div>
+                                <div class="nav_menu__item nav_menu__item_flag_wrapper" th:if="${#locale.toString() == 'en_US'}">
+                                    <a th:href="@{${#httpServletRequest.requestURI}(lang='ru_RU')}" class="nav_menu__item_lang">
+                                        <span>RU</span>
+                                        <img src="/images/lang_arrow.png" alt="" class="lang_arrow">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="btn_cabinet_text">
+                                <div class="header_percent_wrapper">
+                                    <div class="header_wallet">
+                                        <span><img src="/images/wallet.png" alt="" class="wallet_img"></span>
+                                        <span><span th:text="${walletAmount}"></span><span> $</span></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="/account/history" class="btn_cabinet_wrapper">
+                                <span class="btn_cabinet_user">
+                                    <img src="/images/user_header.svg" alt="" class="cabinet_user_img">
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <form class="registration auth_form_container registration_for_modal" >
+        <div class="auth_form_left">
+            <p class="auth_text">Регистрация</p>
+            <div class='auth_input_parent'>
+
+                <input type="email"
+                       id="email"
+                       class="email input_email input_general input_auth js-input-email"
+                       placeholder="Email"
+
+                ><br>
+
+                <img src="/images/auth_email.png" alt="" class="auth_icon">
+            </div>
+            <div class='auth_input_parent' >
+
+                <input type="password"
+                       id="password"
+                       class="input_password input_general input_auth js-password"
+                       placeholder="Пароль"
+                >
+                <img src="/images/auth_close_eye.png" alt="" class="auth_icon closed_eye js-closed-eye">
+                <img src="/images/auth_open_eye.png" alt="" class="auth_icon opened_eye js-opened-eye">
+            </div>
+            <div class="auth_input_parent">
+                <input id="confirmPassword"
+                       type="password"
+                       placeholder="Пароль"
+                       class="password input_password input_general input_auth js-password"
+                       />
+                <img src="/images/auth_close_eye.png" alt="" class="auth_icon closed_eye js-closed-eye">
+                <img src="/images/auth_open_eye.png" alt="" class="auth_icon opened_eye js-opened-eye">
+            </div>
+            <div class='auth_input_parent'>
+                <input type="text"
+                       id="coupon"
+                       class="email input_email input_general input_auth"
+                       th:placeholder="Купон"
+                ><br>
+                <img src="/images/auth_coupon.png" alt="" class="auth_icon auth_icon_coupon">
+            </div>
+
+            <div class="checkbox_wrapper">
+                <div class="checkbox_item">
+                    <label class="switch">
+                        <input type="checkbox" id="approve" class="js-tumbler">
+                        <span class="slider round"></span>
+                    </label>
+                    <label for="approve" class="checkbox_label">Нажимая кнопку зарегистрироваться, Вы соглашаетесь с правилами обмена</label>
+                </div>
+                <div class="checkbox_item">
+                    <label class="switch">
+                        <input type="checkbox" id="notification">
+                        <span class="slider round"></span>
+                    </label>
+                    <label class="checkbox_label checkbox_label_second" for="notification" >Получать
+                        уведомления об акциях и скидках</label>
+                </div>
+            </div>
+            <button type="submit" class="btn_general btn_auth js-btn-registration btn_auth_secondary btn_registration js-btn-enter" th:text="#{button.registration}">Регистрация</button>
+
+        </div>
+        <div  class="auth_form_right">
+            <img src="/images/signup.png" alt="" class="signup_img">
+            <a class="btn_secondary btn_auth btn_auth_new"
+            >Войти</a>
+        </div>
+
+    </form>
+
+    <div  class="modal_update_password">
+        <div class="activation_email_wrapper">
+            <div class="activation_email_parenthsis">
+                <svg xmlns="http://www.w3.org/2000/svg" width="44" height="32" viewBox="0 0 44 32" fill="none">
+                    <path d="M24.8557 31.2321V18.2721C24.8557 12.1281 26.3277 7.64807 29.2717 4.83207C32.2797 1.95207 36.7277 0.448071 42.6157 0.320068L43.8637 6.36807C37.0797 7.07207 33.9437 10.2401 34.4557 15.8721H40.4077V31.2321H24.8557ZM0.47168 31.2321V18.2721C0.47168 12.1281 1.94368 7.64807 4.88768 4.83207C7.89568 1.95207 12.3437 0.448071 18.2317 0.320068L19.4797 6.36807C12.6957 7.07207 9.55968 10.2401 10.0717 15.8721H16.0237V31.2321H0.47168Z" fill="black" fill-opacity="0.1"/>
+                </svg>
+            </div>
+            <p class="activation_email_title">Завершите регистрацию</p>
+            <p class="activation_email_description">Вам на почту отправлено письмо, перейдите по ссылке, которая в письме, чтобы
+                завершить регистрацию.</p>
+            <a href="/login" class="activation_email_btn" th:text="#{button.login}">ОК</a>
+            <img src="/images/activation_email.png" alt="" class="activation_email_img">
+        </div>
+    </div>
+    <div class="overlay_update_password"></div>
+</div>
+<script src="/js/burger.js"></script>
+<script src="//code.tidio.co/y1qxv75ounfxvprxbxargnrelyfkfkbf.js" async></script>
+</body>
+</html>

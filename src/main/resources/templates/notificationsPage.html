@@ -1,0 +1,684 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org" lang="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate"/>
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="expires" content="0"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="shortcut icon" href="/images/logo.ico" type="image/x-icon">
+    <title th:text="#{title.account.history}">Document</title>
+
+</head>
+<body>
+<div class="account_settings_page">
+    <div class="header_mobile">
+        <div class="header_mobile_wrapper js-header-mobile-wrapper">
+            <div class="container container_help">
+                <div class="header_top_row">
+                    <div class="logo_wrapper">
+                        <a href="/">
+                            <img src="/images/logo.svg" alt="" class="logo_img logo_img_tablet">
+                            <img src="/images/logo_mobile.svg" alt="" class="logo_img logo_img_mobile">
+                            <p class="logo_text">MEDIAP2P</p>
+                        </a>
+                    </div>
+                    <div class="lang_cab_wrapper">
+                        <div>
+                            <div  class="lang_cab_wrapper_unauth" sec:authorize="!isAuthenticated()">
+                                <a href="/registration" class="btn_auth_mobile">Авторизация</a>
+                                <ul class="mobile_lang_wrapper mobile_lang_wrapper_unauthed">
+                                    <div class="nav_menu__item nav_menu__item_flag_wrapper" th:if="${#locale.toString() == 'ru_RU'}">
+                                        <a th:href="@{${#httpServletRequest.requestURI}(lang='en_US')}" class="nav_menu__item_lang">
+                                            <span>EN</span>
+                                            <img src="/images/lang_arrow.png" alt="" class="lang_arrow">
+                                        </a>
+                                    </div>
+                                    <div class="nav_menu__item nav_menu__item_flag_wrapper" th:if="${#locale.toString() == 'en_US'}">
+                                        <a th:href="@{${#httpServletRequest.requestURI}(lang='ru_RU')}" class="nav_menu__item_lang">
+                                            <span>RU</span>
+                                            <img src="/images/lang_arrow.png" alt="" class="lang_arrow">
+                                        </a>
+                                    </div>
+                                </ul>
+                            </div>
+                            <div sec:authorize="hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')" class="btns_auth_wrapper lang_cab_wrapper_authed">
+                                <div>
+                                    <a href="/account/history" class="btn_cabinet_wrapper">
+                                        <img src="/images/user-mobile.svg" alt="" class="user_avatar_mobile">
+                                        <span>Личный кабинет</span>
+                                    </a>
+                                </div>
+                                <ul class="mobile_lang_wrapper mobile_lang_wrapper_authed">
+                                    <div class="nav_menu__item nav_menu__item_flag_wrapper" th:if="${#locale.toString() == 'ru_RU'}">
+                                        <a th:href="@{${#httpServletRequest.requestURI}(lang='en_US')}" class="nav_menu__item_lang">
+                                            <span>EN</span>
+                                            <img src="/images/lang_arrow.png" alt="" class="lang_arrow">
+                                        </a>
+                                    </div>
+                                    <div class="nav_menu__item nav_menu__item_flag_wrapper" th:if="${#locale.toString() == 'en_US'}">
+                                        <a th:href="@{${#httpServletRequest.requestURI}(lang='ru_RU')}" class="nav_menu__item_lang">
+                                            <span>RU</span>
+                                            <img src="/images/lang_arrow.png" alt="" class="lang_arrow">
+                                        </a>
+                                    </div>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="burger_icon_wrapper">
+                        <div  class="js-burger-icon">
+                            <img src="/images/burger_icon.svg" class="burger_icon_tablet" alt="">
+                            <img src="/images/burger_icon_mobile.svg" class="burger_icon_mobile" alt="">
+                        </div>
+
+                    </div>
+                </div>
+                <div class="container_burger">
+                    <div class="burger_menu js-burger-menu">
+
+                        <ul class="menu_list_top">
+                            <li class="burger_item burger_item_first burger_item_mobile_tablet">
+                                <a href="/" class="burger_item_link">Начать обмен</a>
+                            </li>
+                            <li class="burger_item burger_item_first burger_item_mobile">
+                                <a href="/" class="burger_item_link">Главная</a>
+                            </li>
+                            <li class="burger_item">
+                                <a href="/about-us" class="burger_item_link">О нас</a>
+                            </li>
+                            <li class="burger_item">
+                                <a href="/reserves" class="burger_item_link">Наши резервы</a>
+                            </li>
+
+
+                            <li class="close_burger_wrapper js-close">
+                                <img src="/images/cross_burger.png" alt="">
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!--    <div class="burger_menu_wrapper js-burger-menu">-->
+
+        <div class="overlay js-overlay"></div>
+
+
+    </div>
+    <header>
+        <div class="container header_desktop">
+            <div class="header_block">
+                <div class="logo_wrapper">
+                    <div class="logo_img_wrapper">
+                        <a href="/">
+                            <img src="/images/logo_desktop.svg" alt="" class="logo_img">
+                        </a>
+                    </div>
+                    <a href="/">
+                        <p class="logo_text">MEDIAP2P</p>
+                    </a>
+                </div>
+
+                <div class="nav_menu_right">
+                    <div class="nav_menu_unauth" sec:authorize="!isAuthenticated()">
+                        <ul class="nav_menu">
+                            <div class="nav_menu_left">
+                                <li class="nav_menu__item"><a href="/" class="nav_menu__item_link">НАЧАТЬ ОБМЕН</a></li>
+                                <li class="nav_menu__item"><a href="/reserves" class="nav_menu__item_link">РЕЗЕРВЫ</a></li>
+                                <li class="nav_menu__item"><a href="/about-us" class="nav_menu__item_link">О НАС</a></li>
+                            </div>
+                        </ul>
+
+
+                        <div class="nav_menu__item nav_menu__item_auth">
+                            <div>
+                                <div class="nav_menu__item nav_menu__item_flag_wrapper" th:if="${#locale.toString() == 'ru_RU'}">
+                                    <a th:href="@{${#httpServletRequest.requestURI}(lang='en_US')}" class="nav_menu__item_lang">
+                                        <span>EN</span>
+                                        <img src="/images/lang_arrow.png" alt="" class="lang_arrow">
+                                    </a>
+                                </div>
+                                <div class="nav_menu__item nav_menu__item_flag_wrapper" th:if="${#locale.toString() == 'en_US'}">
+                                    <a th:href="@{${#httpServletRequest.requestURI}(lang='ru_RU')}" class="nav_menu__item_lang">
+                                        <span>RU</span>
+                                        <img src="/images/lang_arrow.png" alt="" class="lang_arrow">
+                                    </a>
+                                </div>
+                            </div>
+                            <a th:href="@{/login}" class="btn_auth btn_login_header">Войти</a>
+                            <a th:href="@{/registration}" class="btn_aut btn_register_header">Регистрация</a>
+                        </div>
+                    </div>
+                    <div sec:authorize="hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')" class="btns_auth_wrapper">
+                        <ul class="nav_menu nav_menu_authed">
+                            <div class="nav_menu_left">
+                                <li class="nav_menu__item nav_menu__item_autheduser"><a href="/" class="nav_menu__item_link">НАЧАТЬ ОБМЕН</a></li>
+                                <li class="nav_menu__item nav_menu__item_autheduser"><a href="/reserves" class="nav_menu__item_link">РЕЗЕРВЫ</a></li>
+                                <li class="nav_menu__item nav_menu__item_autheduser"><a href="/about-us" class="nav_menu__item_link">О НАС</a></li>
+                            </div>
+                        </ul>
+                        <div class="authed_user_wrapper">
+                            <div>
+                                <div class="nav_menu__item nav_menu__item_flag_wrapper" th:if="${#locale.toString() == 'ru_RU'}">
+                                    <a th:href="@{${#httpServletRequest.requestURI}(lang='en_US')}" class="nav_menu__item_lang">
+                                        <span>EN</span>
+                                        <img src="/images/lang_arrow.png" alt="" class="lang_arrow">
+                                    </a>
+                                </div>
+                                <div class="nav_menu__item nav_menu__item_flag_wrapper" th:if="${#locale.toString() == 'en_US'}">
+                                    <a th:href="@{${#httpServletRequest.requestURI}(lang='ru_RU')}" class="nav_menu__item_lang">
+                                        <span>RU</span>
+                                        <img src="/images/lang_arrow.png" alt="" class="lang_arrow">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="btn_cabinet_text">
+                                <div class="header_percent_wrapper">
+                                    <div class="header_wallet">
+                                        <span><img src="/images/wallet.png" alt="" class="wallet_img"></span>
+                                        <span><span th:text="${walletAmount}"></span><span> $</span></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="/account/history" class="btn_cabinet_wrapper">
+                                <span class="btn_cabinet_user">
+                                    <img src="/images/user_header.svg" alt="" class="cabinet_user_img">
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="history_wrapper history_wrapper_settings_page">
+        <div class="container">
+            <div class="history_container">
+                <div class="history_right_block_tablet">
+                    <div class="settings_notif_wrapper">
+                        <div class="settings_btn_wrapper">
+                            <a class="settings_btn" th:href="@{/account/settings}" >
+                                <img src="/images/settings_icon.svg" alt="" class="settings_icon_history">
+                                <span class="settings_text">Настройки</span>
+                            </a>
+                        </div>
+                        <div class="notifications_header">
+                            <a th:href="@{/account/notification}">
+                                <div class="notif_bell_tablet">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="81" height="81" viewBox="0 0 81 81" fill="none">
+                                        <path d="M81 40.5C81 62.8675 62.8675 81 40.5 81C18.1325 81 0 62.8675 0 40.5C0 18.1325 18.1325 0 40.5 0C62.8675 0 81 18.1325 81 40.5Z" fill="#B67CFF"/>
+                                        <path d="M40.5 55.9636C38.7538 55.9636 37.1843 55.15 36.297 53.7876C35.9294 53.2198 36.1415 52.4919 36.7743 52.1604C37.4035 51.8305 38.2165 52.0208 38.5876 52.5886C39.3989 53.8368 41.6011 53.8368 42.4124 52.5886C42.7818 52.0208 43.5948 51.8305 44.2257 52.1604C44.8585 52.4903 45.0723 53.2198 44.703 53.7876C43.8157 55.15 42.2462 55.9636 40.5 55.9636ZM55.8324 50.5315C56.0534 50.1192 55.9915 49.6307 55.6751 49.2738C55.6416 49.2373 52.4213 45.5578 52.4213 41.293V35.734C52.4213 29.8356 47.0731 25.0364 40.5 25.0364C33.9269 25.0364 28.5787 29.8356 28.5787 35.734V41.293C28.5787 45.5578 25.3584 49.2373 25.3249 49.2738C25.0085 49.6307 24.9466 50.1208 25.1675 50.5315C25.3885 50.9423 25.8515 51.2056 26.3606 51.2056H54.6394C55.1484 51.2056 55.6115 50.9423 55.8324 50.5315ZM31.2298 41.293V35.734C31.2298 31.1473 35.3886 27.4154 40.5 27.4154C45.6114 27.4154 49.7702 31.1473 49.7702 35.734V41.293C49.7702 44.3635 51.0957 47.0947 52.188 48.8266H28.8102C29.9043 47.0947 31.2298 44.3635 31.2298 41.293Z" fill="#0D0D0D"/>
+                                    </svg>
+                                </div>
+                                <p class="notifications_title_tablet">Уведомления</p>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="settings_user_wrapper">
+                        <div class="avatar_wrapper">
+                            <img src="/images/avatar_tablet.svg" alt="" class="avatar">
+                            <div class="logout_wrapper">
+                                <a href="/logout" class="btn_logout">
+                                    <div class="logout_img">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="45" height="41" viewBox="0 0 45 41" fill="none">
+                                            <path d="M29.5262 28.8984V30.5779C29.5262 34.6387 27.1103 36.8757 22.7246 36.8757H11.8419C7.45623 36.8757 5.04028 34.6387 5.04028 30.5779V10.4248C5.04028 6.36394 7.45623 4.12695 11.8419 4.12695H22.7246C27.1103 4.12695 29.5262 6.36394 29.5262 10.4248V12.1042C29.5262 12.7995 28.9168 13.3638 28.1659 13.3638C27.415 13.3638 26.8056 12.7995 26.8056 12.1042V10.4248C26.8056 7.77634 25.5849 6.64609 22.7246 6.64609H11.8419C8.98162 6.64609 7.76095 7.77634 7.76095 10.4248V30.5779C7.76095 33.2263 8.98162 34.3566 11.8419 34.3566H22.7246C25.5849 34.3566 26.8056 33.2263 26.8056 30.5779V28.8984C26.8056 28.2031 27.415 27.6389 28.1659 27.6389C28.9168 27.6389 29.5262 28.2031 29.5262 28.8984ZM40.3037 20.9833C40.4416 20.676 40.4416 20.3283 40.3037 20.021C40.2348 19.8665 40.1351 19.7271 40.0099 19.6112L34.5686 14.573C34.0372 14.0809 33.1756 14.0809 32.6441 14.573C32.1127 15.065 32.1127 15.8628 32.6441 16.3548L35.7639 19.2434H15.4695C14.7186 19.2434 14.1092 19.8077 14.1092 20.503C14.1092 21.1983 14.7186 21.7626 15.4695 21.7626H35.7639L32.6441 24.6512C32.1127 25.1433 32.1127 25.941 32.6441 26.4331C32.9089 26.6783 33.2572 26.8025 33.6055 26.8025C33.9537 26.8025 34.3019 26.6799 34.5667 26.4331L40.008 21.3948C40.135 21.2756 40.2348 21.1361 40.3037 20.9833Z" fill="#0D0D0D"/>
+                                        </svg>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="history_wallet">
+                            <span class="history_wallet_img">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="18" viewBox="0 0 22 18" fill="none">
+<path d="M19.1795 5.2875H16.0205C13.9897 5.2875 12.2974 6.975 12.2974 9V9.1125C12.2974 11.1375 13.9897 12.825 16.0205 12.825H18.0513V13.5C18.0513 14.85 17.0359 15.8625 15.9077 15.8625H4.4C3.2718 15.75 2.25641 14.7375 2.25641 13.3875V4.6125C2.25641 3.2625 3.2718 2.25 4.4 2.25H15.9077C16.6974 2.25 17.4872 2.7 17.8256 3.6C18.0513 4.1625 18.7282 4.3875 19.2923 4.1625C19.8564 3.9375 20.0821 3.2625 19.8564 2.7C19.1795 1.0125 17.6 0 15.9077 0H4.4C2.03077 0 0 2.025 0 4.6125V13.3875C0 15.975 2.03077 18 4.4 18H15.9077C18.3897 18 20.3077 15.975 20.3077 13.3875V12.4875C21.3231 12.0375 22 11.025 22 9.9V8.1C22 6.525 20.759 5.2875 19.1795 5.2875ZM14.5538 9.1125V8.8875C14.5538 8.1 15.2308 7.425 16.0205 7.425H19.1795C19.5179 7.425 19.7436 7.65 19.7436 7.9875V9.9C19.7436 10.2375 19.5179 10.4625 19.1795 10.4625H16.0205C15.2308 10.4625 14.5538 9.9 14.5538 9.1125Z" fill="white"/>
+</svg>
+                            </span>
+                            <span class="history_wallet_text"><span th:text="${walletAmount}"></span><span>100.00 $</span></span>
+                        </div>
+                        <p class='history_email'><span th:text="${userEmail}">oyzziuxui@mail.ru</span></p>
+                    </div>
+                </div>
+                <div class="history_left_block">
+                    <div class="history_items_wrapper">
+                        <div class="history_items">
+                            <tr th:each="order : ${orders}">
+                                <div class="history_item_wrapper">
+                                    <div class="history_item">
+                                        <div class="history_item_left_col">
+                                            <div class="history_item_title"><span>ЗАЯВКА №</span><span
+                                                    th:text="${order.id}">16601494675699</span>
+                                                <span  class="history_item_email" th:text="${order.email}"></span>
+                                            </div>
+                                            <p class="history_item_result">
+                                                <span>
+                                                    <span th:text="${order.takenAmount}">0.52035479</span>
+                                                    <span th:text="${order.takenCoin}"></span>
+                                                </span>
+                                                <img src="/images/history_arrow.png" alt="" class="history_arrow">
+                                                <span>
+                                                    <span th:text="${order.givenAmount}">7</span>
+                                                    <span th:text="${order.givenCoin}"></span>
+                                                </span>
+                                            </p>
+                                            <div class="history_item_left_col_footer">
+                                                <p class="history_item_text history_item_text__time">
+                                                    <img src="/images/date.png" alt="" class="date_img">
+                                                    <span th:text="${order.createdTime}">10.08.2022 в 19:37:54</span>
+                                                </p>
+                                                <p class="history_item_wallet">
+                                                    <span><img src="/images/history_item_wallet.svg" alt="" class="history_item_wallet_img"></span>
+                                                    <span th:text="${order.wallet}">1BoatSLRHtKNngkdXEeobR76b53LETtpyT</span>
+                                                </p>
+                                            </div>
+                                            <div class="history_footer_admin">
+                                                <div class="history_item_btns_wrapper history_item_btns_wrapper_desktop"
+                                                     sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
+                                                    <form th:action="@{/order/confirm/{id}(id=${order.id})}" method="post"
+                                                          class="history_btn_wrapper history_item_btn_wrapper_check">
+                                                        <input class="history_item_btn_wrapper"
+                                                               type="submit" value="">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                            <!--! Font Awesome Pro 6.1.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+                                                            <path d="M438.6 105.4C451.1 117.9 451.1 138.1 438.6 150.6L182.6 406.6C170.1 419.1 149.9 419.1 137.4 406.6L9.372 278.6C-3.124 266.1-3.124 245.9 9.372 233.4C21.87 220.9 42.13 220.9 54.63 233.4L159.1 338.7L393.4 105.4C405.9 92.88 426.1 92.88 438.6 105.4H438.6z"/>
+                                                        </svg>
+                                                    </form>
+                                                    <form th:action="@{/order/freeze/{id}(id=${order.id})}" method="post"
+                                                          class="history_btn_wrapper history_item_btn_wrapper_cancel">
+                                                        <input class="history_item_btn_wrapper"
+                                                               type="submit" value="">
+                                                        <svg style="color: rgb(112, 184, 219);" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M475.6 384.1C469.7 394.3 458.9 400 447.9 400c-5.488 0-11.04-1.406-16.13-4.375l-25.09-14.64l5.379 20.29c3.393 12.81-4.256 25.97-17.08 29.34c-2.064 .5625-4.129 .8125-6.164 .8125c-10.63 0-20.36-7.094-23.21-17.84l-17.74-66.92L288 311.7l.0002 70.5l48.38 48.88c9.338 9.438 9.244 24.62-.1875 33.94C331.5 469.7 325.4 472 319.3 472c-6.193 0-12.39-2.375-17.08-7.125l-14.22-14.37L288 480c0 17.69-14.34 32-32.03 32s-32.03-14.31-32.03-32l-.0002-29.5l-14.22 14.37c-9.322 9.438-24.53 9.5-33.97 .1875c-9.432-9.312-9.525-24.5-.1875-33.94l48.38-48.88L223.1 311.7l-59.87 34.93l-17.74 66.92c-2.848 10.75-12.58 17.84-23.21 17.84c-2.035 0-4.1-.25-6.164-.8125c-12.82-3.375-20.47-16.53-17.08-29.34l5.379-20.29l-25.09 14.64C75.11 398.6 69.56 400 64.07 400c-11.01 0-21.74-5.688-27.69-15.88c-8.932-15.25-3.785-34.84 11.5-43.75l25.96-15.15l-20.33-5.508C40.7 316.3 33.15 303.1 36.62 290.3S53.23 270 66.09 273.4L132 291.3L192.5 256L132 220.7L66.09 238.6c-2.111 .5625-4.225 .8438-6.305 .8438c-10.57 0-20.27-7.031-23.16-17.72C33.15 208.9 40.7 195.8 53.51 192.3l20.33-5.508L47.88 171.6c-15.28-8.906-20.43-28.5-11.5-43.75c8.885-15.28 28.5-20.44 43.81-11.5l25.09 14.64L99.9 110.7C96.51 97.91 104.2 84.75 116.1 81.38C129.9 77.91 142.1 85.63 146.4 98.41l17.74 66.92L223.1 200.3l-.0002-70.5L175.6 80.88C166.3 71.44 166.3 56.25 175.8 46.94C185.2 37.59 200.4 37.72 209.8 47.13l14.22 14.37L223.1 32c0-17.69 14.34-32 32.03-32s32.03 14.31 32.03 32l.0002 29.5l14.22-14.37c9.307-9.406 24.51-9.531 33.97-.1875c9.432 9.312 9.525 24.5 .1875 33.94l-48.38 48.88L288 200.3l59.87-34.93l17.74-66.92c3.395-12.78 16.56-20.5 29.38-17.03c12.82 3.375 20.47 16.53 17.08 29.34l-5.379 20.29l25.09-14.64c15.28-8.906 34.91-3.75 43.81 11.5c8.932 15.25 3.785 34.84-11.5 43.75l-25.96 15.15l20.33 5.508c12.81 3.469 20.37 16.66 16.89 29.44c-2.895 10.69-12.59 17.72-23.16 17.72c-2.08 0-4.193-.2813-6.305-.8438L379.1 220.7L319.5 256l60.46 35.28l65.95-17.87C458.8 270 471.9 277.5 475.4 290.3c3.473 12.78-4.082 25.97-16.89 29.44l-20.33 5.508l25.96 15.15C479.4 349.3 484.5 368.9 475.6 384.1z" fill="#70b8db"></path></svg>
+                                                    </form>
+                                                    <form th:action="@{/order/cancel/{id}(id=${order.id})}" method="post"
+                                                          class="history_btn_wrapper history_item_btn_wrapper_cancel">
+                                                        <input class="history_item_btn_wrapper"
+                                                               type="submit" value="">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                                            <!--! Font Awesome Pro 6.1.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+                                                            <path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/>
+                                                        </svg>
+                                                    </form>
+                                                    <form th:action="@{/order/delete/{id}(id=${order.id})}" method="post"
+                                                          class="history_btn_wrapper history_item_btn_wrapper_remove">
+                                                        <input class="history_item_btn_wrapper"
+                                                               type="submit" value="">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                                            <!--! Font Awesome Pro 6.1.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+                                                            <path d="M135.2 17.69C140.6 6.848 151.7 0 163.8 0H284.2C296.3 0 307.4 6.848 312.8 17.69L320 32H416C433.7 32 448 46.33 448 64C448 81.67 433.7 96 416 96H32C14.33 96 0 81.67 0 64C0 46.33 14.33 32 32 32H128L135.2 17.69zM394.8 466.1C393.2 492.3 372.3 512 346.9 512H101.1C75.75 512 54.77 492.3 53.19 466.1L31.1 128H416L394.8 466.1z"/>
+                                                        </svg>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="history_item_right_col">
+                                            <div class="history_item_statuses">
+                                                <th:block th:if="${order.status}  == 'Complete'">
+                                                    <div class="history_status_block history_status_block_complete">
+                                                        Одобрена
+                                                    </div>
+                                                </th:block>
+                                                <th:block th:if="${order.status}  == 'Wait confirmation'">
+                                                    <div class="history_status_block history_status_block_await">
+                                                        В обработке
+                                                    </div>
+                                                </th:block>
+                                                <th:block th:if="${order.status}  == 'Order canceled'">
+                                                    <div class="history_status_block history_status_block_canceled">
+                                                        Отклонена
+                                                    </div>
+                                                </th:block>
+                                                <th:block th:if="${order.status}  == 'Order frozen'">
+                                                    <div class="history_status_block history_status_block_frozen">
+                                                        Заморожена
+                                                    </div>
+                                                </th:block>
+                                            </div>
+                                            <div>
+                                                <div class="history_item_imgs_wrapper">
+                                                    <div class="history_item_img_wrapper history_item_img_wrapper_left">
+                                                        <img src="/images/bitcoin.png" alt="" class="history_item_img"
+                                                             th:src="@{'https://exchanger-bucket.s3.eu-west-1.amazonaws.com/coin/image/'+${order.givenCoin}}">
+                                                    </div>
+                                                    <div class="history_item_img_wrapper history_item_img_wrapper_right">
+                                                        <img src="/images/solana.png" alt="" class="history_item_img"
+                                                             th:src="@{'https://exchanger-bucket.s3.eu-west-1.amazonaws.com/coin/image/'+${order.takenCoin}}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </tr>
+                        </div>
+
+                        <div class="history_items_tablet">
+                            <tr th:each="order : ${orders}">
+
+                                <div class="history_item_wrapper">
+                                    <div class="history_item">
+                                        <div class="history_item_left_col">
+                                            <div class="history_item_title_wrapper">
+                                                <p class="history_item_title">
+                                                    <span>Заявка №</span>
+                                                    <span th:text="${order.id}">166</span>
+                                                </p>
+                                                <div class="history_item_statuses">
+                                                    <th:block th:if="${order.status}  == 'Complete'">
+                                                        <div class="history_status_block history_status_block_complete">
+                                                            Одобрена
+                                                        </div>
+                                                    </th:block>
+
+                                                    <th:block th:if="${order.status}  == 'Wait confirmation'">
+                                                        <div class="history_status_block history_status_block_await">
+                                                            В обработке
+                                                        </div>
+                                                    </th:block>
+
+                                                    <th:block th:if="${order.status}  == 'Order canceled'">
+                                                        <div class="history_status_block history_status_block_canceled">
+                                                            Отклонена
+                                                        </div>
+                                                    </th:block>
+                                                    <th:block th:if="${order.status}  == 'Order frozen'">
+                                                        <div class="history_status_block history_status_block_frozen">
+                                                            Заморожена
+                                                        </div>
+                                                    </th:block>
+                                                </div>
+                                            </div>
+
+                                            <p class="history_item_result">
+                                                <span class="history_item_result_left">
+                                                    <span th:text="${order.takenAmount}">0.52035479</span>
+                                                    <span th:text="${order.takenCoin}">BTC</span>
+                                                </span>
+                                                <img src="/images/history_arrow_tablet.svg" alt="" class="history_arrow history_arrow_tablet">
+                                                <img src="/images/history_arrow_mobile.svg" alt="" class="history_arrow history_arrow_mobile">
+                                                <span class="history_item_result_right">
+                                                    <span th:text="${order.givenAmount}">7</span>
+                                                    <span th:text="${order.givenCoin}">SOL</span>
+                                                </span>
+                                            </p>
+                                            <div class="history_footer_admin">
+                                                <div class="history_item_btns_wrapper history_item_btns_wrapper_desktop"
+                                                     sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
+                                                    <form th:action="@{/order/confirm/{id}(id=${order.id})}" method="post"
+                                                          class="history_btn_wrapper history_item_btn_wrapper_check">
+                                                        <input class="history_item_btn_wrapper"
+                                                               type="submit" value="">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                            <!--! Font Awesome Pro 6.1.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+                                                            <path d="M438.6 105.4C451.1 117.9 451.1 138.1 438.6 150.6L182.6 406.6C170.1 419.1 149.9 419.1 137.4 406.6L9.372 278.6C-3.124 266.1-3.124 245.9 9.372 233.4C21.87 220.9 42.13 220.9 54.63 233.4L159.1 338.7L393.4 105.4C405.9 92.88 426.1 92.88 438.6 105.4H438.6z"/>
+                                                        </svg>
+                                                    </form>
+                                                    <form th:action="@{/order/freeze/{id}(id=${order.id})}" method="post"
+                                                          class="history_btn_wrapper history_item_btn_wrapper_cancel">
+                                                        <input class="history_item_btn_wrapper"
+                                                               type="submit" value="">
+                                                        <svg style="color: rgb(112, 184, 219);" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M475.6 384.1C469.7 394.3 458.9 400 447.9 400c-5.488 0-11.04-1.406-16.13-4.375l-25.09-14.64l5.379 20.29c3.393 12.81-4.256 25.97-17.08 29.34c-2.064 .5625-4.129 .8125-6.164 .8125c-10.63 0-20.36-7.094-23.21-17.84l-17.74-66.92L288 311.7l.0002 70.5l48.38 48.88c9.338 9.438 9.244 24.62-.1875 33.94C331.5 469.7 325.4 472 319.3 472c-6.193 0-12.39-2.375-17.08-7.125l-14.22-14.37L288 480c0 17.69-14.34 32-32.03 32s-32.03-14.31-32.03-32l-.0002-29.5l-14.22 14.37c-9.322 9.438-24.53 9.5-33.97 .1875c-9.432-9.312-9.525-24.5-.1875-33.94l48.38-48.88L223.1 311.7l-59.87 34.93l-17.74 66.92c-2.848 10.75-12.58 17.84-23.21 17.84c-2.035 0-4.1-.25-6.164-.8125c-12.82-3.375-20.47-16.53-17.08-29.34l5.379-20.29l-25.09 14.64C75.11 398.6 69.56 400 64.07 400c-11.01 0-21.74-5.688-27.69-15.88c-8.932-15.25-3.785-34.84 11.5-43.75l25.96-15.15l-20.33-5.508C40.7 316.3 33.15 303.1 36.62 290.3S53.23 270 66.09 273.4L132 291.3L192.5 256L132 220.7L66.09 238.6c-2.111 .5625-4.225 .8438-6.305 .8438c-10.57 0-20.27-7.031-23.16-17.72C33.15 208.9 40.7 195.8 53.51 192.3l20.33-5.508L47.88 171.6c-15.28-8.906-20.43-28.5-11.5-43.75c8.885-15.28 28.5-20.44 43.81-11.5l25.09 14.64L99.9 110.7C96.51 97.91 104.2 84.75 116.1 81.38C129.9 77.91 142.1 85.63 146.4 98.41l17.74 66.92L223.1 200.3l-.0002-70.5L175.6 80.88C166.3 71.44 166.3 56.25 175.8 46.94C185.2 37.59 200.4 37.72 209.8 47.13l14.22 14.37L223.1 32c0-17.69 14.34-32 32.03-32s32.03 14.31 32.03 32l.0002 29.5l14.22-14.37c9.307-9.406 24.51-9.531 33.97-.1875c9.432 9.312 9.525 24.5 .1875 33.94l-48.38 48.88L288 200.3l59.87-34.93l17.74-66.92c3.395-12.78 16.56-20.5 29.38-17.03c12.82 3.375 20.47 16.53 17.08 29.34l-5.379 20.29l25.09-14.64c15.28-8.906 34.91-3.75 43.81 11.5c8.932 15.25 3.785 34.84-11.5 43.75l-25.96 15.15l20.33 5.508c12.81 3.469 20.37 16.66 16.89 29.44c-2.895 10.69-12.59 17.72-23.16 17.72c-2.08 0-4.193-.2813-6.305-.8438L379.1 220.7L319.5 256l60.46 35.28l65.95-17.87C458.8 270 471.9 277.5 475.4 290.3c3.473 12.78-4.082 25.97-16.89 29.44l-20.33 5.508l25.96 15.15C479.4 349.3 484.5 368.9 475.6 384.1z" fill="#70b8db"></path></svg>
+                                                    </form>
+                                                    <form th:action="@{/order/cancel/{id}(id=${order.id})}" method="post"
+                                                          class="history_btn_wrapper history_item_btn_wrapper_cancel">
+                                                        <input class="history_item_btn_wrapper"
+                                                               type="submit" value="">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                                            <!--! Font Awesome Pro 6.1.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+                                                            <path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/>
+                                                        </svg>
+                                                    </form>
+                                                    <form th:action="@{/order/delete/{id}(id=${order.id})}" method="post"
+                                                          class="history_btn_wrapper history_item_btn_wrapper_remove">
+                                                        <input class="history_item_btn_wrapper"
+                                                               type="submit" value="">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                                            <!--! Font Awesome Pro 6.1.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+                                                            <path d="M135.2 17.69C140.6 6.848 151.7 0 163.8 0H284.2C296.3 0 307.4 6.848 312.8 17.69L320 32H416C433.7 32 448 46.33 448 64C448 81.67 433.7 96 416 96H32C14.33 96 0 81.67 0 64C0 46.33 14.33 32 32 32H128L135.2 17.69zM394.8 466.1C393.2 492.3 372.3 512 346.9 512H101.1C75.75 512 54.77 492.3 53.19 466.1L31.1 128H416L394.8 466.1z"/>
+                                                        </svg>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="history_item_right_col">
+                                            <div class="history_item_imgs_wrapper">
+                                                <div class="history_item_img_wrapper history_item_img_wrapper_left">
+                                                    <img src="/images/bitcoin.png" alt="" class="history_item_img"
+                                                         th:src="@{'https://exchanger-bucket.s3.eu-west-1.amazonaws.com/coin/image/'+${order.givenCoin}}">
+                                                </div>
+                                                <div class="history_item_img_wrapper history_item_img_wrapper_right">
+                                                    <img src="/images/solana.png" alt="" class="history_item_img"
+                                                         th:src="@{'https://exchanger-bucket.s3.eu-west-1.amazonaws.com/coin/image/'+${order.takenCoin}}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="btn_top_down_wrapper js-btn-down">
+                                            <img src="/images/btn_arrow_down.svg" alt="" class="btn_history_arrow js-down btn_arrow_down">
+                                            <img src="/images/btn_arrow_up.svg" alt="" class="btn_history_arrow js-up btn_arrow_up">
+                                        </div>
+                                    </div>
+                                    <div class="history_item_info js-item-info history_item_info_hidden">
+                                        <div class="history_item_info_top">
+                                            <div class="history_item_info_header">
+                                                <div class="history_item_email">
+                                                    <div class="history_item_email_img_wrapper">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="16" viewBox="0 0 22 16" fill="none">
+                                                            <path d="M6.4301 4.38558C6.09076 4.14804 5.62311 4.23057 5.38558 4.5699C5.14804 4.90924 5.23057 5.37689 5.5699 5.61442L6.4301 4.38558ZM11 8.5L10.5699 9.11442C10.8281 9.29519 11.1719 9.29519 11.4301 9.11442L11 8.5ZM16.4301 5.61442C16.7694 5.37689 16.852 4.90924 16.6144 4.5699C16.3769 4.23057 15.9092 4.14804 15.5699 4.38558L16.4301 5.61442ZM1 13H0.25H1ZM3 1V0.25V1ZM19 1V0.25V1ZM5.5699 5.61442L10.5699 9.11442L11.4301 7.88558L6.4301 4.38558L5.5699 5.61442ZM11.4301 9.11442L16.4301 5.61442L15.5699 4.38558L10.5699 7.88558L11.4301 9.11442ZM1.75 13V3H0.25V13H1.75ZM1.75 3C1.75 2.66848 1.8817 2.35054 2.11612 2.11612L1.05546 1.05546C0.539731 1.57118 0.25 2.27065 0.25 3H1.75ZM2.11612 2.11612C2.35054 1.8817 2.66848 1.75 3 1.75V0.25C2.27065 0.25 1.57118 0.539731 1.05546 1.05546L2.11612 2.11612ZM3 1.75H19V0.25H3V1.75ZM19 1.75C19.3315 1.75 19.6495 1.8817 19.8839 2.11612L20.9445 1.05546C20.4288 0.539731 19.7293 0.25 19 0.25V1.75ZM19.8839 2.11612C20.1183 2.35054 20.25 2.66848 20.25 3H21.75C21.75 2.27065 21.4603 1.57118 20.9445 1.05546L19.8839 2.11612ZM20.25 3V13H21.75V3H20.25ZM20.25 13C20.25 13.3315 20.1183 13.6495 19.8839 13.8839L20.9445 14.9445C21.4603 14.4288 21.75 13.7293 21.75 13H20.25ZM19.8839 13.8839C19.6495 14.1183 19.3315 14.25 19 14.25V15.75C19.7293 15.75 20.4288 15.4603 20.9445 14.9445L19.8839 13.8839ZM19 14.25H3V15.75H19V14.25ZM3 14.25C2.66848 14.25 2.35054 14.1183 2.11612 13.8839L1.05546 14.9445C1.57118 15.4603 2.27065 15.75 3 15.75V14.25ZM2.11612 13.8839C1.8817 13.6495 1.75 13.3315 1.75 13H0.25C0.25 13.7293 0.539731 14.4288 1.05546 14.9445L2.11612 13.8839Z" fill="#0D0D0D"/>
+                                                        </svg>
+                                                    </div>
+                                                    <span th:text="${order.email}">emilishere</span>
+                                                </div>
+
+                                                <div class="history_item_text history_item_text__time">
+                                                    <div class="date_img">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+                                                            <path d="M5.25 2.5C5.25 2.91421 5.58579 3.25 6 3.25C6.41421 3.25 6.75 2.91421 6.75 2.5H5.25ZM6.75 1C6.75 0.585786 6.41421 0.25 6 0.25C5.58579 0.25 5.25 0.585786 5.25 1H6.75ZM15.25 2.5C15.25 2.91421 15.5858 3.25 16 3.25C16.4142 3.25 16.75 2.91421 16.75 2.5H15.25ZM16.75 1C16.75 0.585786 16.4142 0.25 16 0.25C15.5858 0.25 15.25 0.585786 15.25 1H16.75ZM13 21.25C13.4142 21.25 13.75 20.9142 13.75 20.5C13.75 20.0858 13.4142 19.75 13 19.75V21.25ZM2.172 19.328L2.70256 18.7979L2.7021 18.7974L2.172 19.328ZM2.172 3.672L2.7021 4.20256L2.70256 4.2021L2.172 3.672ZM19.828 3.672L19.2974 4.2021L19.2979 4.20256L19.828 3.672ZM19.828 19.328L19.2979 18.7974L19.2973 18.7981L19.828 19.328ZM16.9271 19.6516C16.5148 19.6918 16.2133 20.0587 16.2536 20.4709C16.2938 20.8832 16.6607 21.1847 17.0729 21.1444L16.9271 19.6516ZM7.46967 12.4697C7.17678 12.7626 7.17678 13.2374 7.46967 13.5303C7.76256 13.8232 8.23744 13.8232 8.53033 13.5303L7.46967 12.4697ZM9.5 11.5H10.25C10.25 11.1967 10.0673 10.9232 9.78701 10.8071C9.50676 10.691 9.18417 10.7552 8.96967 10.9697L9.5 11.5ZM8.75 15.5C8.75 15.9142 9.08579 16.25 9.5 16.25C9.91421 16.25 10.25 15.9142 10.25 15.5H8.75ZM20.5 8.25C20.9142 8.25 21.25 7.91421 21.25 7.5C21.25 7.08579 20.9142 6.75 20.5 6.75V8.25ZM9.75 6.75C9.33579 6.75 9 7.08579 9 7.5C9 7.91421 9.33579 8.25 9.75 8.25V6.75ZM1 6.75C0.585786 6.75 0.25 7.08579 0.25 7.5C0.25 7.91421 0.585786 8.25 1 8.25V6.75ZM4.875 8.25C5.28921 8.25 5.625 7.91421 5.625 7.5C5.625 7.08579 5.28921 6.75 4.875 6.75V8.25ZM6.75 2.5V1H5.25V2.5H6.75ZM16.75 2.5V1H15.25V2.5H16.75ZM13 19.75H9V21.25H13V19.75ZM9 19.75C7.09329 19.75 5.73861 19.7484 4.71097 19.6102C3.7049 19.4749 3.12543 19.2211 2.70256 18.7979L1.64144 19.8581C2.38957 20.6069 3.3386 20.9391 4.51103 21.0968C5.66189 21.2516 7.13571 21.25 9 21.25V19.75ZM2.7021 18.7974C2.27886 18.3746 2.02512 17.7951 1.88981 16.789C1.75159 15.7614 1.75 14.4067 1.75 12.5H0.25C0.25 14.3643 0.248406 15.8381 0.403193 16.989C0.56088 18.1614 0.893136 19.1104 1.6419 19.8586L2.7021 18.7974ZM1.75 12.5V10.5H0.25V12.5H1.75ZM1.75 10.5C1.75 8.59329 1.75159 7.23861 1.88981 6.21097C2.02512 5.2049 2.27886 4.62543 2.7021 4.20256L1.6419 3.14144C0.893136 3.88957 0.56088 4.8386 0.403193 6.01103C0.248406 7.16189 0.25 8.63571 0.25 10.5H1.75ZM2.70256 4.2021C3.12543 3.77886 3.7049 3.52512 4.71097 3.38981C5.73861 3.25159 7.09329 3.25 9 3.25V1.75C7.13571 1.75 5.66189 1.74841 4.51103 1.90319C3.3386 2.06088 2.38957 2.39314 1.64144 3.1419L2.70256 4.2021ZM9 3.25H13V1.75H9V3.25ZM13 3.25C14.9067 3.25 16.2614 3.25159 17.289 3.38981C18.2951 3.52512 18.8746 3.77886 19.2974 4.2021L20.3586 3.1419C19.6104 2.39314 18.6614 2.06088 17.489 1.90319C16.3381 1.74841 14.8643 1.75 13 1.75V3.25ZM19.2979 4.20256C19.7211 4.62543 19.9749 5.2049 20.1102 6.21097C20.2484 7.23861 20.25 8.59329 20.25 10.5H21.75C21.75 8.63571 21.7516 7.16189 21.5968 6.01103C21.4391 4.8386 21.1069 3.88957 20.3581 3.14144L19.2979 4.20256ZM20.25 10.5V12.5H21.75V10.5H20.25ZM20.25 12.5C20.25 14.4067 20.2484 15.7614 20.1102 16.789C19.9749 17.7951 19.7211 18.3746 19.2979 18.7974L20.3581 19.8586C21.1069 19.1104 21.4391 18.1614 21.5968 16.989C21.7516 15.8381 21.75 14.3643 21.75 12.5H20.25ZM19.2973 18.7981C18.8262 19.2699 18.161 19.531 16.9271 19.6516L17.0729 21.1444C18.439 21.011 19.5238 20.6941 20.3587 19.8579L19.2973 18.7981ZM8.53033 13.5303L10.0303 12.0303L8.96967 10.9697L7.46967 12.4697L8.53033 13.5303ZM8.75 11.5V15.5H10.25V11.5H8.75ZM12.75 14.5V12.5H11.25V14.5H12.75ZM12.75 12.5C12.75 12.4337 12.7763 12.3701 12.8232 12.3232L11.7626 11.2626C11.4344 11.5908 11.25 12.0359 11.25 12.5H12.75ZM12.8232 12.3232C12.8701 12.2763 12.9337 12.25 13 12.25V10.75C12.5359 10.75 12.0908 10.9344 11.7626 11.2626L12.8232 12.3232ZM13 12.25C13.0663 12.25 13.1299 12.2763 13.1768 12.3232L14.2374 11.2626C13.9092 10.9344 13.4641 10.75 13 10.75V12.25ZM13.1768 12.3232C13.2237 12.3701 13.25 12.4337 13.25 12.5H14.75C14.75 12.0359 14.5656 11.5908 14.2374 11.2626L13.1768 12.3232ZM13.25 12.5V14.5H14.75V12.5H13.25ZM13.25 14.5C13.25 14.5663 13.2237 14.6299 13.1768 14.6768L14.2374 15.7374C14.5656 15.4092 14.75 14.9641 14.75 14.5H13.25ZM13.1768 14.6768C13.1299 14.7237 13.0663 14.75 13 14.75V16.25C13.4641 16.25 13.9092 16.0656 14.2374 15.7374L13.1768 14.6768ZM13 14.75C12.9337 14.75 12.8701 14.7237 12.8232 14.6768L11.7626 15.7374C12.0908 16.0656 12.5359 16.25 13 16.25V14.75ZM12.8232 14.6768C12.7763 14.6299 12.75 14.5663 12.75 14.5H11.25C11.25 14.9641 11.4344 15.4092 11.7626 15.7374L12.8232 14.6768ZM20.5 6.75H9.75V8.25H20.5V6.75ZM1 8.25H4.875V6.75H1V8.25Z" fill="#161616"/>
+                                                        </svg>
+                                                    </div>
+                                                    <div class="history_item_text_tablet">
+                                                        <span class="date_text">Дата и время:</span>
+                                                        <span  class="date_text2" th:text="${order.createdTime}">10.08.2022 в 19:37:54</span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="history_item_info_coins">
+                                                <span>
+                                                    <span th:text="${order.takenAmount}">0.52035479</span>
+                                                    <span th:text="${order.takenCoin}">BTC</span>
+                                                </span>
+                                                <img src="/images/history_item_info_coins_arrow_tablet.svg" alt="" class="history_item_info_arrow history_item_info_arrow_tablet">
+                                                <span>
+                                                    <span th:text="${order.givenAmount}">7</span>
+                                                    <span th:text="${order.givenCoin}">SOL</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="history_item_info_footer">
+                                            <div class="history_item_info_wallet">
+                                                <div class="history_item_info_wallet_top">
+                                                    <!--                                                     <img src="/images/solana.png" alt="" class="history_item_info_coin_wallet"-->
+                                                    <!--                                                           th:src="@{'https://exchanger-bucket.s3.eu-west-1.amazonaws.com/coin/image/'+${order.takenCoin}}">-->
+                                                    <p class="history_item_info_wallet_text">Адрес кошелька для получения: </p>
+                                                </div>
+                                                <div class="wallet_input_history">
+                                                    <div class="wallet_img_svg">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none">
+                                                            <path d="M20.3212 7.14313H19.0045V3.57179C19.0045 3.38235 18.933 3.20068 18.8057 3.06673C18.6784 2.93277 18.5058 2.85752 18.3257 2.85752H2.03619C1.85618 2.85752 1.68355 2.78227 1.55626 2.64832C1.42897 2.51436 1.35746 2.33269 1.35746 2.14325C1.35746 1.95382 1.42897 1.77214 1.55626 1.63819C1.68355 1.50424 1.85618 1.42898 2.03619 1.42898H18.0543C18.2343 1.42898 18.4069 1.35373 18.5342 1.21978C18.6615 1.08583 18.733 0.904151 18.733 0.714715C18.733 0.525279 18.6615 0.343602 18.5342 0.209651C18.4069 0.0756994 18.2343 0.000446169 18.0543 0.000446169H2.03619C1.77413 -0.00523954 1.51357 0.0434646 1.2694 0.143777C1.02523 0.244089 0.802226 0.394043 0.613137 0.585073C0.424047 0.776103 0.272575 1.00447 0.167371 1.25712C0.0621669 1.50977 0.00529368 1.78175 0 2.05754V17.0572C0.000888386 17.4452 0.0745003 17.8292 0.21662 18.1872C0.358739 18.5452 0.566574 18.8702 0.828222 19.1435C1.08987 19.4169 1.40019 19.6332 1.74141 19.7802C2.08263 19.9272 2.44805 20.0018 2.81674 20H18.3257C18.5058 20 18.6784 19.9247 18.8057 19.7908C18.933 19.6568 19.0045 19.4751 19.0045 19.2857V15.7144H20.3212C20.4069 15.7212 20.493 15.7095 20.5742 15.6801C20.6555 15.6507 20.7301 15.6041 20.7937 15.5433C20.8572 15.4824 20.9083 15.4086 20.9438 15.3262C20.9792 15.2439 20.9983 15.1548 20.9999 15.0644V7.92169C21.0022 7.72539 20.9332 7.53558 20.8071 7.39093C20.681 7.24628 20.5072 7.15766 20.3212 7.14313ZM19.6832 14.2858H13.8597C13.1641 14.2597 12.5068 13.9442 12.0321 13.4085C11.5574 12.8728 11.3042 12.1608 11.328 11.4287C11.3042 10.6967 11.5574 9.98465 12.0321 9.44896C12.5068 8.91327 13.1641 8.59774 13.8597 8.57167H19.6832V14.2858Z" fill="#0D0D0D"/>
+                                                        </svg>
+                                                    </div>
+                                                    <p class="history_item_info_wallet_value" th:text="${order.wallet}">1BoatSLRHtKNngkdXEeobR76b53LETtpyT</p>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </tr>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="history_right_block">
+                    <div class="avatar_wrapper">
+                        <img src="/images/avatar.png" alt="" class="avatar">
+                        <div class="logout_wrapper">
+                            <a href="/logout" class="btn_logout">
+                                <img src="/images/btn_logout.png" alt="" class="logout_img">
+                            </a>
+                        </div>
+                    </div>
+                    <p class='history_email'><span th:text="${userEmail}"></span></p>
+                    <div class="history_wallet">
+                        <span><img src="/images/history_wallet.png" alt="" class="history_wallet_img"></span>
+                        <span class="history_wallet_text"><span th:text="${walletAmount}"></span><span>100.00 $</span></span>
+                    </div>
+
+                    <div class="settings_btn_wrapper">
+                        <a class="settings_btn" th:href="@{/account/settings}" >
+                            <img src="/images/settings_icon.svg" alt="" class="settings_icon_history">
+                            <span class="settings_text">Настройки</span>
+                        </a>
+                    </div>
+
+                    <div class="notifications_block">
+                        <div class="notifications_header">
+                            <p class="notifications_title">Уведомления</p>
+                            <img src="/images/bell.png" alt="" class="bell_icon">
+                        </div>
+
+                        <div class="btn_openAllWrapper">
+                            <a th:href="@{/account/notification}" class="btn_openAll">Открыть все</a>
+                        </div>
+
+                        <div class="notifications_items">
+                            <tr th:each="order : ${orders}">
+                                <th:block th:if="${order.status}  == 'Complete'">
+                                    <div class="notification_item">
+                                        <div class="notification_item_title">
+                                            <img src="/images/logo.png" alt="" class="notification_item_logo">
+                                            <span>Mediap2p</span>
+                                        </div>
+                                        <div class="notification_item_description">
+                                            <span>Заявка </span><span>№</span><span th:text="${order.id}"></span><span> </span><span>одобрена</span>
+                                        </div>
+                                        <div class="notification_item_date" th:text="${order.createdTime}">11.03.2023</div>
+                                    </div>
+                                </th:block>
+
+                                <th:block th:if="${order.status}  == 'Wait confirmation'">
+                                    <div class="notification_item">
+                                        <div class="notification_item_title">
+                                            <img src="/images/logo.png" alt="" class="notification_item_logo">
+                                            <span>Mediap2p</span>
+                                        </div>
+                                        <div class="notification_item_description">
+                                            <span>Заявка №</span><span th:text="${order.id}"></span><span> </span><span>в обработке</span>
+                                        </div>
+                                        <div class="notification_item_date" th:text="${order.createdTime}">11.03.2023</div>
+                                    </div>
+                                </th:block>
+
+                                <th:block th:if="${order.status}  == 'Order canceled'">
+                                    <div class="notification_item">
+                                        <div class="notification_item_title">
+                                            <img src="/images/logo.png" alt="" class="notification_item_logo">
+                                            <span>Mediap2p</span>
+                                        </div>
+                                        <div class="notification_item_description">
+                                            <span>Заявка №</span><span th:text="${order.id}"></span><span> </span><span>отклонена</span>
+                                        </div>
+                                        <div class="notification_item_date" th:text="${order.createdTime}">11.03.2023</div>
+                                    </div>
+                                </th:block>
+                                <th:block th:if="${order.status}  == 'Order frozen'">
+                                    <div class="notification_item">
+                                        <div class="notification_item_title">
+                                            <img src="/images/logo.png" alt="" class="notification_item_logo">
+                                            <span>Mediap2p</span>
+                                        </div>
+                                        <div class="notification_item_description">
+                                            <span>Заявка №</span><span th:text="${order.id}"></span><span> </span><span>заморожена</span>
+                                        </div>
+                                        <div class="notification_item_date" th:text="${order.createdTime}">11.03.2023</div>
+                                    </div>
+                                </th:block>
+
+                            </tr>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="modal_update_password">
+        <div class="notifications_wrapper">
+            <a href="/account/history" class="close_notif_btn">
+                <img src="/images/close_notif.png" alt="" class="close_notif close_notif_desktop">
+                <img src="/images/close_notif_mobile.png" alt="" class="close_notif close_notif_mobile ">
+                <img src="/images/close_new_btn.svg" alt="" class="close_notif close_notif_tablet">
+            </a>
+            <div class="notification_header">
+                <img src="/images/notif_page_bell.png" alt="" class="notif_page_bell">
+                <p class="notif_title">Уведомления</p>
+                <img src="/images/notif_page_bell_tablet.png" alt="" class="notif_page_bell_tablet">
+                <!--            <a href="/account/history" class="notifications_header_tablet_close">-->
+                <!--                <img src="/images/close_new_btn.svg" alt="" class="notifications_header_tablet_close_img">-->
+                <!--            </a>-->
+            </div>
+
+            <div class="notificationPage_items">
+                <tr th:each="order : ${orders}">
+                    <div class="notificationPage_item">
+                        <div class="notificationPage_item_header">
+                            <div class="notification_item_title">
+                                <img src="/images/logo.png" alt="" class="notification_item_logo">
+                                <span>Mediap2p</span>
+                            </div>
+                            <div class="notification_item_date" th:text="${order.createdTime}">11.03.2023</div>
+                        </div>
+                        <span class="notification_item_description notificationPage_item_description">
+                        <span>Заявка </span><span>№</span><span th:text="${order.id}"></span><span> </span>
+                        <th:block th:if="${order.status}  == 'Wait confirmation'">
+                            <span>в обработке</span>
+                        </th:block>
+                        <th:block th:if="${order.status}  == 'Complete'">
+                            <span>одобрена</span>
+                        </th:block>
+
+                        <th:block th:if="${order.status}  == 'Order canceled'">
+                            <span>отклонена</span>
+                        </th:block>
+
+                        <th:block th:if="${order.status}  == 'Order frozen'">
+                            <span>заморожена</span>
+                        </th:block>
+                    </span>
+                    </div>
+            </div>
+            </tr>
+        </div>
+    </div>
+    </div>
+
+    <div class="overlay_update_password"></div>
+
+</div>
+<script src="//code.tidio.co/y1qxv75ounfxvprxbxargnrelyfkfkbf.js" async></script>
+<script src="/js/index.js"></script>
+<script src="/js/burger.js"></script>
+</body>
+</html>
